@@ -1,3 +1,18 @@
-O termo tecnologia assistiva é a tradução do termo em inglês, Assistive Technology. Foi criado esse termo em 1988, devido aos a legislação norte-americana Public Law 100-407 que regula os direitos e leis dos cidadãos com deficiência nos Estados Unidos, além de prover a compra dos recursos que estes necessitam.
-As tecnologias de apoio ou tecnologias assistivas não se preocupa apenas com os produtos produzidos para uma maior independencia ou/e qualidade de vida dos seus usuários, ela também vai incluir serviços que abrangem esse publico. Se tem um melhor entendimento dessa diferença entre produto e serviço com o seguinte trecho do documento “Educação em Tecnologias de Apoio para Utilizadores Finais: Linhas de Orientação para Formadores” : 
-"Uma "tecnologia de acesso a transportes públicos", por exemplo, não consiste apenas numa frota de veículos acessíveis (ex. autocarros com plataforma elevatória), mas engloba toda a organização dos transportes, incluindo controlo de tráfego, implantação das paragens, informações e procedimentos de emissão/validação de bilhetes, serviço de clientes, formação do pessoal, etc. Sem uma organização deste tipo, o simples veículo não ofereceria qualquer "transporte público"."
+O termo tecnologia assistiva é a tradução do termo em inglês, Assistive Technology. Foi criado esse
+termo em 1988, devido aos a legislação norte-americana Public Law 100-407 que regula os direitos e
+leis dos cidadãos com deficiência nos Estados Unidos, além de prover a compra dos recursos que estes
+necessitam.
+As tecnologias de apoio ou tecnologias assistivas não se preocupa apenas com os produtos produzidos
+para uma maior independencia ou/e qualidade de vida dos seus usuários, ela também vai incluir
+serviços que abrangem esse publico. Se tem um melhor entendimento dessa diferença entre produto e
+serviço com o seguinte trecho do documento “Educação em Tecnologias de Apoio para Utilizadores
+Finais: Linhas de Orientação para Formadores” : 
+"Uma "tecnologia de acesso a transportes públicos", por exemplo, não consiste apenas numa frota de
+veículos acessíveis (ex. autocarros com plataforma elevatória), mas engloba toda a organização dos
+transportes, incluindo controlo de tráfego, implantação das paragens, informações e procedimentos de
+emissão/validação de bilhetes, serviço de clientes, formação do pessoal, etc. Sem uma organização 
+deste tipo, o simples veículo não ofereceria qualquer "transporte público"."
+Tecnologia Assistiva é uma área do conhecimento, de característica interdisciplinar, que engloba
+produtos, recursos, metodologias, estratégias, práticas e serviços que objetivam promover a 
+funcionalidade, relacionada à atividade e participação, de pessoas com deficiência, incapacidades 
+ou mobilidade reduzida, visando sua autonomia, independência, qualidade de vida e inclusão social.
