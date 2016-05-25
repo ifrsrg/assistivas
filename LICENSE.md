@@ -23,7 +23,7 @@ O texto completo dessa licença pode ser obtido no endereço: <https://creativec
 
 The MIT License (MIT)
 
-Copyright (c) 2016 IFRS Câmpus Rio Grande
+Copyright (c) 2016 IFRS Câmpus Rio Grande - Divisão de Ensino de Computação (DC)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
