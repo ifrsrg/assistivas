@@ -1,0 +1,16 @@
+Criar um aplicativo que torne acessivo à cegos, o site da empresa de ônibus local,
+Noiva do Mar(http://www.noivadomar.com.br/site/content/home/).
+
+----
+
+Criar um aplicativo para smartphones que conectado via bluetooth com um microfone, transforma a fala em texto.
+O usuário do app pode digitar um texto que é enviado a pessoa com os fones em forma de aúdio.
+
+----
+
+App que torna o Facebook acessível a cegos.
+
+----
+
+Criar uma base de dados com a descrição de várias obras de arte, para que assim o aluno cego tenha
+maior integração nas aulas.
