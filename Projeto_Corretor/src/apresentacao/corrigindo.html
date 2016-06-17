@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Corrigindo</title>
+	<!--<link rel="stylesheet" type="text/css" href="\Projeto_Corretor\src\apresentacao\assets\css\estilo.css">-->
+	<script>
+		var i = 0;
+		function verificaCaixas() {  
+
+			var inpfields = document.getElementsByName("correcao");
+
+			var temp = 0;
+
+			for(var i=0; i<inpfields.length; i++) {
+				if(inpfields[i].checked) temp += 1;
+			}
+
+			if(temp != 1) {
+				alert("É necessario marcar apenas uma caixa");
+				window.event.preventDefault()
+			}
+
+		}
+
+		function loadDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					document.getElementById("demo").innerHTML = xhttp.responseText;
+					var vetor = xhttp.responseText.toString().split("--");
+					var vetor2 = vetor[1].split(" ");
+					var mudancas = document.querySelectorAll(".changes");
+					alert(mudancas.legth);
+
+					for(var i = 0; i < vetor2.length; i++){
+
+					}
+				}
+			};
+			xhttp.open("GET", i, true);
+			i++;
+			xhttp.send();
+		}	
+		</script>
+	</head>
+	<body onload="loadDoc()">
+
+		<p align="center">
+			Texto a ser corrigido
+		</p>
+
+		<br>
+		<br>
+		<br>
+
+
+		<form method='post' action='/correcao'>
+			<input type="checkbox" name="correcao" value=""> <p class="changes"></p>
+			<br>
+			<input type="checkbox" name="correcao" value=""> <p class="changes"></p>
+			<br>
+			<input type="checkbox" name="correcao" value=""> <p class="changes"></p>
+			<br>
+			<input type="checkbox" name="correcao" value="Nenhuma Correção"> Nenhuma Correcao
+			<br>
+			<br>
+			<p id="demo"> </p>
+
+
+			<input type='submit' value="Corrigir" onclick = "verificaCaixas()"/>
+		</form>
+
+	</body>
+	</html>

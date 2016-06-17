@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/compiler-0.8.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/guava-16.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/javax.servlet-3.0.0.v201112011016.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-http-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-io-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-security-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-server-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-servlet-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-util-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-webapp-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/jetty-xml-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/slf4j-simple-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/spark-core-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thaylles/Desktop/Thaylles/Programação/spark/spark-template-mustache-1.0.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
