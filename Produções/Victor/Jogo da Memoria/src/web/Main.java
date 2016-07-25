@@ -1,6 +1,10 @@
 package web;
 
-import controladores.*;
+import controladores.Cadastro_Controlador;
+import controladores.Home_controlador;
+import controladores.Menu_controlador;
+import controladores.Pares_Controlador;
+import controladores.UploadsListaControlador;
 import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.template.mustache.MustacheTemplateEngine;

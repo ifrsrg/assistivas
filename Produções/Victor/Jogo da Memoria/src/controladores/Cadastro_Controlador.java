@@ -1,6 +1,8 @@
 package controladores;
 
+import dao.UsuarioDAO;
 import spark.*;
+import modelos.Usuario;
 
 public class Cadastro_Controlador {
 
@@ -11,6 +13,14 @@ public class Cadastro_Controlador {
 
 		@Override
 		public Object handle(Request req, Response resp) throws Exception {
+			Usuario user = new Usuario(req.queryMap("nome").value(),
+									   req.queryMap("email").value(),
+									   req.queryMap("login").value(),
+									   req.queryMap("senha").value());
+			UsuarioDAO dao = new UsuarioDAO();
+			dao.save(user);
+			user.setId(dao.selectMax());
+			req.session().attribute("user", user.getId());
 			resp.redirect("/menu");
 			return null;
 		}	

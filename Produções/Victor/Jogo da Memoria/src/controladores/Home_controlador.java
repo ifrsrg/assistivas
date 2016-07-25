@@ -2,8 +2,6 @@ package controladores;
 
 import spark.*;
 
-import java.sql.*;
-
 public class Home_controlador{
 
 	private final TemplateViewRoute mostrar = new Mostrar();
@@ -11,7 +9,7 @@ public class Home_controlador{
 
 	class Mostrar implements TemplateViewRoute{
 		public ModelAndView handle(Request req, Response resp) {
-
+			
 			
 			return new ModelAndView(null, "home.html");
 		}

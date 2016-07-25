@@ -6,28 +6,21 @@
 </head>
 <body>
 	<a href = '/jogar'>Jogar</a>
+	{{#user}}
 	<table>
-		<tr>
-			<td>Nome</td>
-		</tr>
-		<tr>
-			<td>Partidas jogadas:</td>
-		</tr>
-		<tr>
-			<td>Partidas ganhas:</td>
-		</tr>
-		<tr>
-			<td>Rendimento modo fácil:</td>
-		</tr>
-		<tr>
-			<td>Rendimento modo médio:</td>
-		</tr>
-		<tr>
-			<td>Rendimento modo difícil:</td>
-		</tr>
-		<tr>
-			<td><a href = '/meusUploads'>Meus uploads</a></td>
-		</tr>
+			<tr>
+				<td>{{nome}}</td>
+			</tr>
+			<tr>
+				<td>Partidas jogadas: {{num_jogos}}</td>
+			</tr>
+			<tr>
+				<td>Tempo médio: {{duracao}}</td>
+			</tr>
+			<tr>
+				<td><a href = '/meusUploads'>Meus uploads</a></td>
+			</tr>
 	</table>
+	{{/user}}
 </body>
 </html>
