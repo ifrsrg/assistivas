@@ -52,7 +52,7 @@ public class UsuarioDAO {
 		
 		try{
 			Class.forName("org.postgresql.Driver");
-			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria", "postgres", "projeto_de_pesquisa");
+			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
 			if (c != null) {
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT * FROM USUARIOS WHERE ID_USER =" + id);
