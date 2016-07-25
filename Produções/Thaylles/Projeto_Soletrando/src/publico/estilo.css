@@ -1,0 +1,27 @@
+body{
+	 background-color: black;
+}
+.container{
+	position: absolute;
+	top: 40%;
+	left: 20%;
+	max-width: 100%;
+}
+label{
+	color: white;
+}
+#canto{
+	position: absolute;
+	top:0%;
+	left: -20%;
+	width:1000px;
+	height:100px;
+}
+button{
+	width: 70px;
+}
+#cadastro{
+	position: absolute;
+	top:0%;
+	left: 0%;
+}
