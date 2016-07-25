@@ -45,4 +45,31 @@ public class UsuarioDAO {
 		}
 		return result;
 	}
+	
+	public String selectUsuario(int id){
+		
+		Usuario user = new Usuario();
+		
+		try{
+			Class.forName("org.postgresql.Driver");
+			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria", "postgres", "projeto_de_pesquisa");
+			if (c != null) {
+				Statement s = c.createStatement();
+				ResultSet rs = s.executeQuery("SELECT * FROM USUARIOS WHERE ID_USER =" + id);
+				while(rs.next()){
+					user.setId(id);
+					user.setNome(rs.getString("nome"));
+					user.setEmail(rs.getString("email"));
+					user.setLogin(rs.getString("login"));
+					user.setSenha(rs.getString("senha"));
+					user.setNum_jogos(rs.getInt("num_jogos"));
+					user.setDuracao(rs.getLong("duracao"));
+					return user.toString();
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

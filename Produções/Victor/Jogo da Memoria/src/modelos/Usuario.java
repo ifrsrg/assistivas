@@ -26,6 +26,9 @@ public class Usuario {
 		duracao = Integer.parseInt(vetor[6]);
 	}
 	
+	public Usuario() {
+	}
+
 	public String toInsert(){
 		return "'" + nome + "','" + email + "','" + login + "','" + senha + "'," + num_jogos + "," + duracao;
 	}
@@ -37,6 +40,54 @@ public class Usuario {
 	
 	public int getId(){
 		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public int getNum_jogos() {
+		return num_jogos;
+	}
+
+	public void setNum_jogos(int num_jogos) {
+		this.num_jogos = num_jogos;
+	}
+
+	public long getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(long duracao) {
+		this.duracao = duracao;
 	}
 
 	@Override
