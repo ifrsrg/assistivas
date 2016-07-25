@@ -29,7 +29,7 @@ public class UsuarioDAO {
 	    int result = -1;
 		try{
 			Class.forName("org.postgresql.Driver");
-			 c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria","postgres","projeto_de_pesquisa");
+			 c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname","username","password");
 			 if (c != null) {
 				s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT MAX(ID_USER) FROM USUARIOS");
