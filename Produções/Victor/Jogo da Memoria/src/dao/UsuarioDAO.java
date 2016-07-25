@@ -1,6 +1,7 @@
 package dao;
 
 import modelos.Usuario;
+
 import java.sql.*;
 
 public class UsuarioDAO {
@@ -48,8 +49,6 @@ public class UsuarioDAO {
 	
 	public String selectUsuario(int id){
 		
-		Usuario user = new Usuario();
-		
 		try{
 			Class.forName("org.postgresql.Driver");
 			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
@@ -57,19 +56,49 @@ public class UsuarioDAO {
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT * FROM USUARIOS WHERE ID_USER =" + id);
 				while(rs.next()){
-					user.setId(id);
-					user.setNome(rs.getString("nome"));
-					user.setEmail(rs.getString("email"));
-					user.setLogin(rs.getString("login"));
-					user.setSenha(rs.getString("senha"));
-					user.setNum_jogos(rs.getInt("num_jogos"));
-					user.setDuracao(rs.getLong("duracao"));
-					return user.toString();
+					return preencheUser(rs).toString();
 				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public int verificaUsuario(String login, String senha){
+		
+		try{
+			Class.forName("org.postgresql.Driver");
+			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
+			if (c != null) {
+				Statement s = c.createStatement();
+				ResultSet rs = s.executeQuery("SELECT ID_USER FROM USUARIOS WHERE (LOGIN = '" + login + "' OR EMAIL = '" + login + "') AND SENHA = '" + senha+"'");
+				while(rs.next()){
+					return rs.getInt("id_user");
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public Usuario preencheUser(ResultSet dados){
+		Usuario user = new Usuario();
+		try {
+			user.setId(dados.getInt("id_user"));
+			user.setNome(dados.getString("nome"));
+			user.setEmail(dados.getString("email"));
+			user.setLogin(dados.getString("login"));
+			user.setSenha(dados.getString("senha"));
+			user.setNum_jogos(dados.getInt("num_jogos"));
+			user.setDuracao(dados.getLong("duracao"));
+			return user;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }
