@@ -1,11 +1,14 @@
 package banco;
 import java.sql.*;
 
+import DAO.Login;
+import DAO.Usuario;
+
 //COMPILAR: javac JDBCSelect.java
 //EXECUTAR: java -cp .:./jdbc???.jar JDBCSelect
 
 public class JDBCSelect
-{   public static boolean loga(String login, String senha) 
+{   public static boolean loga(Login usuario) 
     {   Connection c = null;
         Statement s = null;
         ResultSet rs = null;
@@ -20,7 +23,7 @@ public class JDBCSelect
             {   dbmd = c.getMetaData();
                 System.out.println("Connection to "+dbmd.getDatabaseProductName()+" "+dbmd.getDatabaseProductVersion()+" successful.");
                 s = c.createStatement();
-                rs = s.executeQuery("SELECT login, senha FROM usuarios where login ='"+login+"' and senha='"+senha+"'");
+                rs = s.executeQuery("SELECT login, senha FROM usuarios where login ='"+usuario.getLogin()+"' and senha='"+usuario.getSenha()+"'");
                 rsmd = rs.getMetaData();
                 s.close();
             }

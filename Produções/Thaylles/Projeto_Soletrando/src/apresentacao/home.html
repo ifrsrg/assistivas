@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/estilo.css">
 	<title>HOME</title>
 </head>
 <body>
-<p>
-Pagina Inicial
-</p>
-<a href="/login">Login</a>
+	<p>
+		Pagina Inicial
+	</p>
+	<!-- <input class="btn btn-default" href="/login">Login</input> -->
+
+	<div class="container">
+		<form action="/recebeaudio" method="post" enctype="multipart/form-data">
+			<div class="col-sm-2">
+				<input name="nome" type="name" required class="form-control" id="nome" placeholder="Digite a palavra">
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2">
+					<input type="file" required accept="audio/mp3" name="arquivo">
+				</div>
+				<div>
+				<br>
+					<p>Qual o nivel dessa palavra?</p>
+					<br>
+					Nivel 1
+					<input type="radio" name="nivel1" value="nivel1"><br>
+					Nivel 2
+					<input type="radio" name="nivel2" value="nivel2"><br>
+					Nivel 3
+					<input type="radio" name="nivel3" value="nivel3">
+				</div>
+			</div>
+			<br>
+			<br>			
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
 </body>
 </html>

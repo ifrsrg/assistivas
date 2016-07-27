@@ -9,12 +9,12 @@ public class insertBanco{
     {   Connection c = null;
     	PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "CREATE TABLE IF NOT EXISTS usuarios (login varchar(20) not null, email varchar(50) not null, senha varchar(15) not null)";
+        String query = "CREATE TABLE IF NOT EXISTS usuarios (login varchar(20) UNIQUE not null, email varchar(50) not null, senha varchar(15) not null)";
         Statement stmt;
 
         try
         {   Class.forName("org.postgresql.Driver");
-        c = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "postgres", null);
+        c = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "postgres", "Thaylles");
             if (c != null){  
             	stmt = c.createStatement();
             	stmt.executeUpdate(query);
