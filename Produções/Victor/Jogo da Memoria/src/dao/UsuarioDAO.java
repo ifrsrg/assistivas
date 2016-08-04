@@ -11,7 +11,7 @@ public class UsuarioDAO {
 	    Statement s = null;
 		 try{   
 			 Class.forName("org.postgresql.Driver");
-			 c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname","username","password");
+			 c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria","postgres","projeto_de_pesquisa");
 			 if (c != null) {
 				s = c.createStatement();
 				s.executeUpdate("INSERT INTO USUARIOS(NOME, EMAIL, LOGIN, SENHA, NUM_JOGOS, DURACAO) VALUES ("+user.toInsert()+")");
@@ -30,7 +30,7 @@ public class UsuarioDAO {
 	    int result = -1;
 		try{
 			Class.forName("org.postgresql.Driver");
-			 c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname","username","password");
+			 c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria","postgres","projeto_de_pesquisa");
 			 if (c != null) {
 				s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT MAX(ID_USER) FROM USUARIOS");
@@ -51,14 +51,16 @@ public class UsuarioDAO {
 		
 		try{
 			Class.forName("org.postgresql.Driver");
-			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
+			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria", "postgres", "projeto_de_pesquisa");
 			if (c != null) {
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT * FROM USUARIOS WHERE ID_USER =" + id);
 				while(rs.next()){
 					return preencheUser(rs).toString();
 				}
+				s.close();
 			}
+			c.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -69,14 +71,16 @@ public class UsuarioDAO {
 		
 		try{
 			Class.forName("org.postgresql.Driver");
-			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
+			Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria", "postgres", "projeto_de_pesquisa");
 			if (c != null) {
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery("SELECT ID_USER FROM USUARIOS WHERE (LOGIN = '" + login + "' OR EMAIL = '" + login + "') AND SENHA = '" + senha+"'");
 				while(rs.next()){
 					return rs.getInt("id_user");
 				}
+				s.close();
 			}
+			c.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -100,5 +104,29 @@ public class UsuarioDAO {
 		}
 		return null;
 		
+	}
+	
+	public String selectUsers(String login){
+		Connection c = null;
+	    Statement s = null;
+
+	    String retorno = "";
+	    
+		try{
+			Class.forName("org.postgresql.Driver");
+			 c = DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria","postgres","projeto_de_pesquisa");
+			 if (c != null) {
+				s = c.createStatement();
+				ResultSet rs = s.executeQuery("SELECT LOGIN FROM USUARIOS WHERE LOGIN = '" + login + "'");
+				while(rs.next()){
+					retorno += rs.getString("login");
+				}
+				s.close();
+			 }
+			 c.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retorno;
 	}
 }

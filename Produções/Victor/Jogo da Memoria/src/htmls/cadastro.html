@@ -3,26 +3,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro</title>
+<script src="/script.js"></script>
+
 </head>
 <body>
 	<h1>Cadastro</h1>
 	
-	<form action='/cadastro' method='post' enctype='value'>
+	<form action='/cadastro' method='post' onsubmit='return verificaSubmit()'>
 		<table>
 			<tr>
-				<td><input type='text' name='nome' placeholder='Nome'></td>
+				<td><input type='text' name='nome' placeholder='Nome' onblur='verificaNome(this)'></td>
 			</tr>
 			<tr>
 				<td><input type='text' name='email' placeholder='E-mail'></td>
 			</tr>
 			<tr>
-				<td><input type='text' name='login' placeholder='Login'></td>
+				<td><input type='text' name='login' placeholder='Login' onblur='verificaLogin(this)'></td>
 			</tr>
 			<tr>
-				<td><input type='password' name='senha' placeholder='Senha'></td>
+				<td><input type='password' name='senha' placeholder='Senha' onblur='verificaSenha(this)'></td>
 			</tr>
 			<tr>
-				<td><input type='password' placeholder='Digite a senha novamente'></td>
+				<td><input type='password' name='senha2' placeholder='Digite a senha novamente'></td>
 			</tr>
 			<tr>
 				<td><input type='submit' value='Criar Conta'>

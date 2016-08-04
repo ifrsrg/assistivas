@@ -4,14 +4,16 @@
 <meta charset="UTF-8">
 
 <title>Home</title>
+
 </head>
 <body>
 	<h1>Jogo da Memória</h1>
 	<form method='post' action='/home'>
 		<table>
 			<tr><th><h2>Login</h2></th></tr>
+			<tr><td>{{erro}}</td></tr>
 			<tr>
-				<td><input type='text' name='login' placeholder ='Login ou email'></td>
+				<td><input type = 'text' name='login' placeholder ='Login ou email'></td>
 			</tr>
 			<tr>
 				<td><input type = 'password' name='senha' placeholder = 'Senha'></td>

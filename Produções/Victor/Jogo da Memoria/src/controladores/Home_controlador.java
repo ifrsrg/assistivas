@@ -1,5 +1,7 @@
 package controladores;
 
+import java.util.HashMap;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -14,7 +16,13 @@ public class Home_controlador{
 
 	class Mostrar implements TemplateViewRoute{
 		public ModelAndView handle(Request req, Response resp) {
-			return new ModelAndView(null, "home.html");
+			
+			HashMap dados = new HashMap();
+			
+			if (req.queryMap("erro") != null)
+				dados.put("erro", req.queryParams("erro"));
+						
+			return new ModelAndView(dados, "home.html");
 		}
 	}
 	

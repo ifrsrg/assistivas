@@ -1,10 +1,16 @@
 package web;
 
+import java.net.URLEncoder;
+
 import controladores.Cadastro_Controlador;
 import controladores.Home_controlador;
 import controladores.Menu_controlador;
 import controladores.Pares_Controlador;
 import controladores.UploadsListaControlador;
+import controladores.Usuarios_Controlador;
+import spark.Filter;
+import spark.Request;
+import spark.Response;
 import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.template.mustache.MustacheTemplateEngine;
@@ -16,6 +22,22 @@ public class Main {
 		Spark.staticFileLocation("/pub");
 		
 		MustacheTemplateEngine engine = new MustacheTemplateEngine("htmls");
+		
+		Filter logado = new Filter(){
+
+			@Override
+			public void handle(Request req, Response resp) throws Exception {
+				if (req.session().attribute("user") == null) {
+					System.out.println("hey");
+					String erro = URLEncoder.encode("Você deve estar logado", "UTF-8");
+					resp.redirect("/home?erro=" + erro);
+				}
+			}
+		};
+		
+		Spark.before("/menu", logado);
+		Spark.before("/meusUploads", logado);
+		Spark.before("/novoPar", logado);
 		
 		Home_controlador home = new Home_controlador();
 				
@@ -41,6 +63,10 @@ public class Main {
 		Spark.get("/novoPar", pares.getTemplateView(), engine);
 		
 		Spark.post("/novoPar", pares.getRoute());
+		
+		Usuarios_Controlador users = new Usuarios_Controlador();
+		
+		Spark.get("/users/:login", users, engine);
 		
 	}
 
