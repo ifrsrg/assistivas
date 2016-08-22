@@ -3,16 +3,13 @@ package modelos;
 public class Usuario {
 	
 	private String nome, email, login, senha;
-	private int id, num_jogos;
-	private long duracao;
+	private Integer id;
 	
 	public Usuario(String nome, String email, String login, String senha){
 		this.nome = nome;
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
-		this.num_jogos = 0;
-		this.duracao = 0;
 	}
 	
 	public Usuario(String user){
@@ -22,15 +19,9 @@ public class Usuario {
 		login = vetor[2];
 		senha = vetor[3];
 		id = Integer.parseInt(vetor[4]);
-		num_jogos = Integer.parseInt(vetor[5]);
-		duracao = Integer.parseInt(vetor[6]);
 	}
 	
 	public Usuario() {
-	}
-
-	public String toInsert(){
-		return "'" + nome + "','" + email + "','" + login + "','" + senha + "'," + num_jogos + "," + duracao;
 	}
 
 	public void setId(int num) {
@@ -74,25 +65,9 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public int getNum_jogos() {
-		return num_jogos;
-	}
-
-	public void setNum_jogos(int num_jogos) {
-		this.num_jogos = num_jogos;
-	}
-
-	public long getDuracao() {
-		return duracao;
-	}
-
-	public void setDuracao(long duracao) {
-		this.duracao = duracao;
-	}
-
 	@Override
 	public String toString() {
-		return nome + "," + email + "," + login + "," + senha + "," + id + "," + num_jogos + "," + duracao;
+		return nome + "," + email + "," + login + "," + senha + "," + id;
 	}
 	
 }

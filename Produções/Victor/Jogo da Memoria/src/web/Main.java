@@ -2,33 +2,34 @@ package web;
 
 import java.net.URLEncoder;
 
-import controladores.Cadastro_Controlador;
-import controladores.Home_controlador;
-import controladores.Menu_controlador;
-import controladores.Pares_Controlador;
-import controladores.UploadsListaControlador;
-import controladores.Usuarios_Controlador;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
-import spark.TemplateViewRoute;
 import spark.template.mustache.MustacheTemplateEngine;
+import controladores.Cadastro_Controlador;
+import controladores.Home_controlador;
+import controladores.JsonTransformer;
+import controladores.Menu_controlador;
+import controladores.Offset_Controlador;
+import controladores.Pares_Controlador;
+import controladores.UploadsListaControlador;
+import controladores.Usuarios_Controlador;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
+				
 		Spark.staticFileLocation("/pub");
 		
 		MustacheTemplateEngine engine = new MustacheTemplateEngine("htmls");
+		JsonTransformer jsonengine = new JsonTransformer();
 		
 		Filter logado = new Filter(){
 
 			@Override
 			public void handle(Request req, Response resp) throws Exception {
 				if (req.session().attribute("user") == null) {
-					System.out.println("hey");
 					String erro = URLEncoder.encode("Você deve estar logado", "UTF-8");
 					resp.redirect("/home?erro=" + erro);
 				}
@@ -38,6 +39,7 @@ public class Main {
 		Spark.before("/menu", logado);
 		Spark.before("/meusUploads", logado);
 		Spark.before("/novoPar", logado);
+		Spark.before("/offsets/:offset", logado);
 		
 		Home_controlador home = new Home_controlador();
 				
@@ -68,6 +70,8 @@ public class Main {
 		
 		Spark.get("/users/:login", users, engine);
 		
+		Offset_Controlador offsets = new Offset_Controlador();
+		
+		Spark.get("/offsets/:offset", "application/json", offsets, jsonengine);
 	}
-
 }

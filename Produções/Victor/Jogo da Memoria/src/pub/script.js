@@ -58,9 +58,7 @@ function verificaSenha(element){
 	var senha = element.value;
 	var login = document.getElementsByName('login')[0].value;
 	var nome = document.getElementsByName('nome')[0].value;
-	
-	alert(senha.length);
-	
+		
 	if (senha === login || senha === nome) {
 		alert("senha não pode ser igual ao nome ou login");
 		return false;
@@ -86,6 +84,7 @@ function verificaSenha2(element){
 }
 
 function verificaSubmit(){
+	alert("hey");
 	var nome = document.getElementsByName('nome')[0];
 	var login = document.getElementsByName('login')[0];
 	var senha = document.getElementsByName('senha')[0];

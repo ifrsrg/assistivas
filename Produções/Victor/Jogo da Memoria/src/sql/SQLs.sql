@@ -1,0 +1,16 @@
+CREATE TABLE pares (
+	id_user 	INTEGER NOT NULL
+				REFERENCES usuarios(id_user),
+	nome 		VARCHAR(20) NOT NULL,
+	data 		VARCHAR(15) NOT NULL PRIMARY KEY,
+	form_img	VARCHAR(5) NOT NULL,
+	form_vid	VARCHAR(5) NOT NULL
+);
+
+CREATE TABLE usuarios(
+	id_user SERIAL     NOT NULL PRIMARY KEY,
+	nome 	VARCHAR(30) NOT NULL,
+	email   VARCHAR(50) NOT NULL,
+	login   VARCHAR(12) NOT NULL,
+	senha   VARCHAR(20) NOT NULL
+);

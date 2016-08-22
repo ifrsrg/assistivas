@@ -6,16 +6,27 @@
 </head>
 <body>
 	<h1>Cadastrar novo Par</h1>
+	{{erro}}
 	<form method = 'post' action='/novoPar' enctype="multipart/form-data">
 	
 		<table>
 			<tr>
+				<td><input type='text' placeholder='Nome do item upado' name='nome'></td>
+			</tr>
+			
+			<tr>
 				<td>Selecione um video</td>
-				<td><input type = 'file'></td>
+			</tr>
+			<tr>
+				<td><input type = 'file' name='video'></td>
+				
 			</tr>
 			<tr>
 				<td>Selecione uma imagem</td>
-				<td><input type = 'file'></td>
+			</tr>
+			<tr>
+				<td><input type = 'file' name='foto'></td>
+			
 			</tr>
 			<tr>
 				<td colspan='2'><input type='submit' value = 'Salvar'></td>
