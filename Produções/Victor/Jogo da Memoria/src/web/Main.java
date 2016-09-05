@@ -9,9 +9,11 @@ import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 import controladores.Cadastro_Controlador;
 import controladores.Home_controlador;
+import controladores.Jogo_Controlador;
 import controladores.JsonTransformer;
 import controladores.Menu_controlador;
 import controladores.Offset_Controlador;
+import controladores.ParesJogo_Controlador;
 import controladores.Pares_Controlador;
 import controladores.UploadsListaControlador;
 import controladores.Usuarios_Controlador;
@@ -42,6 +44,8 @@ public class Main {
 		Spark.before("/offsets/:offset", logado);
 		
 		Home_controlador home = new Home_controlador();
+		
+		Spark.get("/", home.getTemplateView(), engine);
 				
 		Spark.get("/home", home.getTemplateView(), engine);
 		Spark.post("/home", home.getRoute());
@@ -68,10 +72,18 @@ public class Main {
 		
 		Usuarios_Controlador users = new Usuarios_Controlador();
 		
-		Spark.get("/users/:login", users, engine);
+		Spark.get("/users/:login", "application/json", users, jsonengine);
 		
 		Offset_Controlador offsets = new Offset_Controlador();
 		
 		Spark.get("/offsets/:offset", "application/json", offsets, jsonengine);
+		
+		Jogo_Controlador jogo_controlador = new Jogo_Controlador();
+		
+		Spark.get("/jogar", jogo_controlador.getTemplateView(), engine);
+		
+		ParesJogo_Controlador pares_jogo = new ParesJogo_Controlador();
+		
+		Spark.get("/paresjogo/:nivel/:quant/:teste", "application/json", pares_jogo, jsonengine);
 	}
 }

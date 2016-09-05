@@ -13,7 +13,7 @@ public class Menu_controlador implements TemplateViewRoute{
 			Usuario user = new Usuario(dao.selectUsuario(req.session().attribute("user")));
 			return new ModelAndView(user, "menu.html");
 		} catch (Exception e){
-			throw new RuntimeException(e);
+			throw new NullPointerException();
 		}
 	}
 }

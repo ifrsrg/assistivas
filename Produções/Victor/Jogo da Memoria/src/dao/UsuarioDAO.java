@@ -1,8 +1,12 @@
 package dao;
 
-import modelos.Usuario;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import modelos.Usuario;
 
 public class UsuarioDAO {
    
@@ -96,16 +100,17 @@ public class UsuarioDAO {
 		
 	}
 	
-	public String selectUsers(String login){
+	public String selectLogin(String login){
 
-	    String retorno = "";
-	    
+		String retorno = new String();
+		
 		try{
 			Connection con = factory.getConnection();
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("SELECT LOGIN FROM USUARIOS WHERE LOGIN = '" + login + "'");
-			while(rs.next()){
-				retorno += rs.getString("login");
+			
+			if(rs.next()){
+				retorno = rs.getString("login");
 			}
 			s.close();
 			con.close();

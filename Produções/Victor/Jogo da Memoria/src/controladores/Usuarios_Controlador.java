@@ -1,20 +1,14 @@
 package controladores;
 
-import java.util.HashMap;
-
 import dao.UsuarioDAO;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.TemplateViewRoute;
+import spark.Route;
 
-public class Usuarios_Controlador implements TemplateViewRoute{
+public class Usuarios_Controlador implements Route{
 
-	@Override
-	public ModelAndView handle(Request req, Response resp) {
+	public Object handle(Request req, Response resp) throws Exception {
 		UsuarioDAO dao = new UsuarioDAO();
-		HashMap dados = new HashMap();
-		dados.put("nomes", dao.selectUsers(req.params("login")));
-		return new ModelAndView(dados, "users.html");
-	}
+		return dao.selectLogin(req.params("login"));
+	}		
 }

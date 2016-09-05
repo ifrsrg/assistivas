@@ -38,6 +38,7 @@ public class Pares_Controlador {
 			int id = req.session().attribute("user");
 			
 			String nome = req.queryMap("nome").value();
+			Integer nivel = Integer.parseInt(req.queryMap("nivel").value());
 			
 			String time = getTimestamp();
 			
@@ -45,7 +46,7 @@ public class Pares_Controlador {
 				SalvaInputs(video, "video", id, nome, time)) {
 				String form_img = image.getContentType().split("/")[1];
 				String form_vid = video.getContentType().split("/")[1];
-				Par par = new Par(req.session().attribute("user"), nome, time, form_img, form_vid);
+				Par par = new Par(req.session().attribute("user"), nome, time, form_img, form_vid, nivel);
 				ParDAO parDAO = new ParDAO();
 				parDAO.save(par);
 				resp.redirect("/menu");
@@ -79,10 +80,18 @@ public class Pares_Controlador {
 			} return false;
 		}
 		
+		@SuppressWarnings("deprecation")
 		public String getTimestamp(){
 			Date data = new Date();
-			return data.getDay() + normatiza(data.getDate()) + normatiza(data.getMonth()+1) + (data.getYear() + 1900) +
-					normatiza(data.getHours()) + normatiza(data.getMinutes()) + normatiza(data.getSeconds());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(data.getDay());
+			stringBuilder.append(normatiza(data.getDate()));
+			stringBuilder.append(normatiza(data.getMonth()+1));
+			stringBuilder.append((data.getYear() + 1900));
+			stringBuilder.append(normatiza(data.getHours()));
+			stringBuilder.append(normatiza(data.getMinutes()));
+			stringBuilder.append(normatiza(data.getSeconds()));
+			return stringBuilder.toString();
 		}
 		
 		public String normatiza(int numero){

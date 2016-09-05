@@ -7,17 +7,18 @@ public class Par {
 	private String data;
 	private String form_img;
 	private String form_vid;
+	private Integer nivel;
 
 	public Par(){
-		
 	}	
 	
-	public Par(Integer id, String nome, String data, String form_img, String form_vid){
+	public Par(Integer id, String nome, String data, String form_img, String form_vid, Integer nivel){
 		this.id = id;
 		this.nome = nome;
 		this.data = data;
 		this.form_img = form_img;
 		this.form_vid = form_vid;
+		this.nivel = nivel;
 	}
 	
 	public Integer getId() {
@@ -50,6 +51,15 @@ public class Par {
 	public void setForm_vid(String form_vid) {
 		this.form_vid = form_vid;
 	}
+	
+	public Integer getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Integer nivel) {
+		this.nivel = nivel;
+	}
+	
 	@Override
 	public String toString() {
 		return "Par [id=" + id + ", nome=" + nome + ", data=" + data + "]";
