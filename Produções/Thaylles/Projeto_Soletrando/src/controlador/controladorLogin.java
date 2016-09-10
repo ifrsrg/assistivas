@@ -5,7 +5,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateViewRoute;
-import banco.JDBCSelect;
+import model.*;
 import DAO.*;
 
 public class controladorLogin {
@@ -17,10 +17,20 @@ public class controladorLogin {
 		public Object handle(Request req, Response resp) throws Exception {
 			String login = req.queryMap("login").value();
 			String senha = req.queryMap("senha").value();
-			Login usuario = new Login(login, senha);
+			Login cliente = new Login();
 			
-			if(JDBCSelect.loga(usuario) == true){
-				resp.redirect("/game");
+			cliente.setLogin(login);
+			cliente.setSenha(senha);
+			
+			System.out.print(req.attributes());
+			
+			int identificador = UsuarioDAO.verificador(cliente);
+			
+			if(UsuarioDAO.select(identificador) != null){
+				req.session().attribute("user", identificador);
+				System.out.print(req.attributes());
+				System.out.print(req.session().attribute("user"));
+				resp.redirect("/login/home");
 				return null;
 			}
 			else{

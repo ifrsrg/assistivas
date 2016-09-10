@@ -1,8 +1,7 @@
 package controlador;
 
-import DAO.Usuario;
-import banco.JDBCSelect;
-import banco.insertBanco;
+import DAO.UsuarioDAO;
+import model.Usuario;
 import spark.*;
 
 public class controladorCadastro{
@@ -17,7 +16,13 @@ public class controladorCadastro{
 			String email = req.queryMap("email").value();
 			String senha = req.queryMap("senha").value();
 			
-			insertBanco.adiciona(new Usuario(login,email,senha));
+			Usuario usuario = new Usuario();
+			usuario.setLogin(login);
+			usuario.setEmail(email);
+			usuario.setSenha(senha);
+			
+			UsuarioDAO dao = new UsuarioDAO();
+			dao.insert(usuario);
 			
 			resp.redirect("/home");
 			return null;
@@ -25,9 +30,7 @@ public class controladorCadastro{
 			
 	}
 	public class Mostra implements TemplateViewRoute{
-	@Override
 	public ModelAndView handle(Request req, Response resp) {
-		
 		return new ModelAndView (null, "cadastro.html");
 	}
 	

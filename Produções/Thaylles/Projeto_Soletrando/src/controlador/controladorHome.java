@@ -1,9 +1,5 @@
 package controlador;
-
-import DAO.AdicionaDAO;
-import DAO.Usuario;
-import banco.JDBCSelect;
-import concatenateWAV.ConcatenateWAV;
+import DAO.UsuarioDAO;
 import controlador.*;
 import distance.Levenshtein;
 import spark.*;
