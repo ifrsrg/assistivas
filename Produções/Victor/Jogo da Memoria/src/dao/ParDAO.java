@@ -60,7 +60,7 @@ public class ParDAO {
 		}
 	}
 	
-	public ArrayList<Par> randomPares(int nivel, int quant, int id, int teste){
+	public ArrayList<Par> randomPares(int nivel, int quant, Integer id, int teste){
 		Connection con = factory.getConnection();
 		String sql = "SELECT * FROM pares WHERE ";
 		if (nivel != 0)

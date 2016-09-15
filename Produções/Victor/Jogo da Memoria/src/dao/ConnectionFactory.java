@@ -16,7 +16,7 @@ public class ConnectionFactory {
 	
 	public Connection getConnection(){
 		try{
-			return DriverManager.getConnection("jdbc:postgresql://localhost/dbname", "username", "password");
+			return DriverManager.getConnection("jdbc:postgresql://localhost/Jogo da Memoria", "postgres", "projeto_de_pesquisa");
 		}catch(SQLException e){
 			throw new RuntimeException(e);
 		}

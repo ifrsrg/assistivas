@@ -11,7 +11,8 @@ public class ParesJogo_Controlador implements Route{
 	@Override
 	public Object handle(Request req, Response resp) throws Exception {
 		resp.header("Access-Control-Allow-Origin", "*");
-		int id_user = req.session().attribute("user");
+		Integer id_user = req.session().attribute("user");
+		System.out.println(id_user);
 		ParDAO dao = new ParDAO();
 		int nivel = Integer.parseInt(req.params("nivel"));
 		int quant = Integer.parseInt(req.params("quant"));

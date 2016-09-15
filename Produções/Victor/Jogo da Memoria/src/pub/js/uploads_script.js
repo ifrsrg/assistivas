@@ -2,7 +2,6 @@ function Ajax(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	    	alert(xhttp.responseText);
 	    	var vetor = JSON.parse(xhttp.responseText);
 	    	var table = document.getElementsByTagName("table")[0];
 	    	for (var i = 0; i < 5 && vetor[i] != undefined; i++) {
@@ -24,7 +23,6 @@ function Ajax(){
 }
 
 function rowNum(){
-	alert(document.getElementsByClassName("item").length);
 	return document.getElementsByClassName("item").length;
 }
 

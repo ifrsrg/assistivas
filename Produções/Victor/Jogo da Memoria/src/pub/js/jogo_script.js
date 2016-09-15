@@ -1,66 +1,121 @@
 var tabuleiro = [];
 var pares = [];
+var selecionadas = [];
 
 function carregarJogo(){
 	var nivel = getNivel();
 	var tamanho = getTamanho();
 	var tipo_pares = getTipoPares();
 	Ajax(nivel, tamanho, tipo_pares);
-	montar(nivel, tamanho);
 }
 
-function montar(nivel, tamanho){ //monta o HTML através do innerHTML
-    var linhas, tamanho, colunas,change = "";
+function montar(tamanho){ //monta o HTML através do innerHTML
+    var nivel = getNivel();
+    var tamanho = getTamanho();
+    var linhas, colunas,change = "";
     var elemento = document.getElementsByTagName("table")[0];
-    alert(tamanho);
+
     switch(tamanho){
         case "6":  linhas = 2;
-                 colunas = 6; break;
+                   colunas = 6; break;
         case "10": linhas = 3;
-                 colunas = 8; break;
+                   colunas = 8; break;
         case "12": linhas = 3;
-                 colunas = 10;
+                   colunas = 10;
     }    
     
-    alert(linhas + "   " + colunas);
-    
     var count = 0;
-    
-    for (var i = 0; i < linhas; i++){
+    //vetor para saber quantas vezes cada par foi posicionado
+    posicionados = [];
+
+    for(var i = 0; i < linhas; i++){
         change += "<tr>";
-        for (var j = 0; j < colunas; j++){
-            change += "<td><img class='carta' onclick='joga(" + count + ")' src='image/cover.jpg' id='"+count+"'></td>";
+        for(var j = 0; j < colunas; j++){
+            change += "<td></td>";
+        }
+    }
+
+    elemento.innerHTML = change;
+
+    var posicoes = document.getElementsByTagName("td");
+    var vezes = 0;
+    while(count < tamanho){
+        var random_num = parseInt(Math.random()*(tamanho*2));
+        var pos = posicoes[random_num];
+        if (pos.innerHTML === "") {
+            if (vezes ==  0) {
+                console.log(pares[count]);
+                pos.innerHTML = "<img class='carta' data-ext = 0 data-id = "+pares[count].nome+
+                                " src='image/cover.jpg'></td>";
+            }else{
+                pos.innerHTML = "<img class='carta' data-ext = 1 data-id = "+pares[count].nome+
+                                " src='image/cover.jpg'></td>";
+            }
+            tabuleiro[random_num] = pares[count];
+            vezes++;
+        }
+        if (vezes == 2) {
+            vezes = 0;
             count++;
         }
-        change += "</tr>";
     }
-    alert("Hey");
-    elemento.innerHTML = change + "</table>";
 }
 
-function embaralha(vetor){
-    var vezes = 0;
+function carregaPares(vetor){
     pares = JSON.parse(vetor);
-    var tamanho = pares.length;
-    alert(tamanho);
-    for (var i = 0; i < tamanho*2;){
-        var aleatorio = parseInt((Math.random()*(tamanho)));
-        //verifica se existem dois pares
-        for (var j = 0; j < tabuleiro.length; j++)
-            if (vezes < 2 && pares[tabuleiro[j]] === pares[aleatorio]) vezes++;
-        //add no tabuleiro
-        if (vezes < 2){
-            tabuleiro[i] = aleatorio;
-            i++;
-        }
-        vezes = 0;
+    if (pares.length < getTamanho()) {
+        window.location = "http://localhost:4567/menu";
+    }else{
+        montar();
     }
-    alert(tabuleiro);
 }
+
+function forma_nome(par, ext){
+	return par.id + "_" + par.nome + "_" + par.data + "." + ext;
+}
+
+/*function joga(element){
+	if (selecionadas.length === 2 && tabuleiro[selecionadas[0]] !== tabuleiro[selecionadas[1]]){
+        clearTimeout(tenta);
+        limpa();
+    }        
+    //var elemento = document.getElementById(numero);
+    if (elemento.src.endsWith("cover.jpg")){
+        elemento.src = "imagens/" + pares[tabuleiro[numero]].nome;
+        selecionadas[selecionadas.length] = numero;
+        if (selecionadas.length === 2){
+            if (tabuleiro[selecionadas[0]] !== tabuleiro[selecionadas[1]]){
+                tenta = setTimeout(function(){limpa();}, 3000);
+                if (jogador_atual === 1) jogador_atual = 0;
+                else jogador_atual++;
+            }else{
+                new Audio("sons/"+tabuleiro[selecionadas[0]]+".ogg").play();
+                jogadores[jogador_atual]++;
+                selecionadas = [];
+            }
+        }
+    }
+    if ((jogadores[0]) + (jogadores[1]) === tabuleiro.length/2){
+        tabuleiro=[];
+        if (jogadores[0] > jogadores[1])
+            vencedor = "<h2>Jogador1 ganhou<br>"+jogadores[0]+" Pontos</h2>";
+        if (jogadores[0] < jogadores[1])
+            vencedor = "<h2>Jogador2 ganhou<br>"+jogadores[1]+" Pontos</h2>";
+        if (jogadores[0] === jogadores[1])
+            vencedor = "<h2>Empate<br>"+jogadores[0] + " Pontos</h2>";
+        audio[modo].pause();
+        modo = 0;
+        montar();
+    }
+        atualizaPlayers();
+
+}
+}
+*/
 
 function Ajax(nivel, tamanho, tipo_pares){
 	var url = "http://localhost:4567/paresjogo/"+nivel+"/"+tamanho+"/"+tipo_pares;
-	$.get(url, embaralha);
+	$.get(url, carregaPares);
 	
 }
 

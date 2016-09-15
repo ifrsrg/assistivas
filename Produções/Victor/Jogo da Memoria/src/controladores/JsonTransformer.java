@@ -1,8 +1,10 @@
 package controladores;
 
+import com.google.gson.Gson;
+
 import spark.ResponseTransformer;
 
-import com.google.gson.Gson;
+
 
 public class JsonTransformer implements ResponseTransformer {
 

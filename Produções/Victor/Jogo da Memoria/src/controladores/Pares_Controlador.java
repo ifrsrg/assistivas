@@ -29,12 +29,12 @@ public class Pares_Controlador {
 		public Object handle(Request req, Response resp) throws Exception {
 			
 			MultipartConfigElement multipart = new MultipartConfigElement("/pub");
-			
+						
 			req.raw().setAttribute("org.eclipse.multipartConfig", multipart);
-			
+						
 			Part image = req.raw().getPart("foto");
 			Part video = req.raw().getPart("video");
-			
+						
 			int id = req.session().attribute("user");
 			
 			String nome = req.queryMap("nome").value();

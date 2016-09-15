@@ -39,7 +39,6 @@ function verificaLogin(element){
 }
 
 function Ajax(login){
-	alert(login);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -52,8 +51,6 @@ function Ajax(login){
 }
 
 function Valida(ajax, login){
-	alert(ajax);
-	alert(login);
 	if (ajax === login) {
 		alert("login existe");
 		valida_login = false;
@@ -94,11 +91,6 @@ function verificaSubmit(){
 	var login = document.getElementsByName('login')[0];
 	var senha = document.getElementsByName('senha')[0];
 	var senha2 = document.getElementsByName('senha2')[0];
-	
-	alert("Nome " + verificaNome(nome));
-	alert("Login " + valida_login);
-	alert("verificaSenha(senha) " + verificaSenha(senha));
-	alert("verificaSenha2(senha2) " + verificaSenha2(senha2));
 	
 	if (verificaNome(nome) && valida_login
 		&& verificaSenha(senha) && verificaSenha2(senha2)){
