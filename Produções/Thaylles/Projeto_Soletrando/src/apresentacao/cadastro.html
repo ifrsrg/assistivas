@@ -10,15 +10,15 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		function checkPasswordMatch() {
-			var password = $("#senha").val();
-			var confirmPassword = $("#senha2").val();
+	function checkPasswordMatch() {
+		var password = $("#senha").val();
+		var confirmPassword = $("#senha2").val();
 
-			if (password != confirmPassword){
-				$("#divCheckPasswordMatch").html("<strong>Fracasso!</strong> As senhas n�o conferem.");
-				$("#divCheckPasswordMatch").addClass("alert alert-danger");
-			}
+		if (password != confirmPassword){
+			$("#divCheckPasswordMatch").html("<strong>Fracasso!</strong> As senhas n�o conferem.");
+			$("#divCheckPasswordMatch").addClass("alert alert-danger");
 		}
+	}
 	</script>
 	
 </head>
@@ -35,7 +35,7 @@
 				</a>
 			</li>
 			<li>
-				<a class="btn btn-default" href="login">Ja tem cadastro?</a>
+				<ahref="login">Já tem cadastro?</a>
 			</li>
 		</ul>
 	</div>

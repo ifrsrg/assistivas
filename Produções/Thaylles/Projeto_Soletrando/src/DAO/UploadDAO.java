@@ -7,7 +7,7 @@ public class UploadDAO {
 		try {
 			Connection c = null;
 		    Statement stmt;
-		    c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "null");
+		    c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
 			stmt = c.createStatement();
         	stmt.executeUpdate("CREATE TABLE IF NOT EXISTS palavras"
         			+ "(palavra varchar(20) UNIQUE NOT NULL, dificuldade INTEGER, caminho VARCHAR(50));");
@@ -26,13 +26,15 @@ public class UploadDAO {
     	String sql = "INSERT INTO palavras VALUES (?,?,?)";
 
         try{   
-        c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "null");
+        c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
         	
         PreparedStatement cmd = c.prepareStatement(sql);
             	
         cmd.setString(1, palavra);
         cmd.setInt(2, dificuldade);
         cmd.setString(3, caminho);
+        
+        cmd.execute();
             	
         cmd.close();
         c.close();

@@ -1,8 +1,7 @@
 package controlador;
 
-import DAO.Usuario;
-import banco.JDBCSelect;
-import banco.insertBanco;
+import DAO.*;
+import model.*;
 import spark.*;
 
 public class controladorAdiciona implements TemplateViewRoute	{
@@ -14,7 +13,14 @@ public class controladorAdiciona implements TemplateViewRoute	{
 			String email = req.queryMap("email").value();
 			String senha = req.queryMap("senha").value();
 			
-			insertBanco.adiciona(new Usuario(login,email,senha));
+			Usuario usuario = new Usuario();
+			usuario.setEmail(email);
+			usuario.setLogin(login);
+			usuario.setSenha(senha);
+			
+			UsuarioDAO dao = new UsuarioDAO();
+			dao.insert(usuario);
+			
 			
 			resp.redirect("/");
 			return null;

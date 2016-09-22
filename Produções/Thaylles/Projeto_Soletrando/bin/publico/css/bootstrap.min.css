@@ -8,6 +8,7 @@
 .container{
 	position: absolute;
 	top: 40%;
+	right: 30%;
 	max-width: 100%;
 }
 label{

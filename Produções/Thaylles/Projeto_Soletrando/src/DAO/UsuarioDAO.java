@@ -16,7 +16,7 @@ public class UsuarioDAO{
 		try {
 			Connection c = null;
 		    Statement stmt;
-		    c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "null");
+		    c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
 			stmt = c.createStatement();
         	stmt.executeUpdate("CREATE TABLE IF NOT EXISTS usuarios "
         			+ "(id_usuario SERIAL PRIMARY KEY, login VARCHAR(20) UNIQUE NOT NULL, "
@@ -36,7 +36,7 @@ public class UsuarioDAO{
     	String sql = "INSERT INTO usuarios (login, email, senha) VALUES (?,?,?)";
 
         try{   
-        c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "null");
+        c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
         
             	
             	PreparedStatement cmd = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -46,7 +46,6 @@ public class UsuarioDAO{
                 cmd.setString(3, usuario.getSenha());
                 cmd.execute();
                 
-             
                 ResultSet key = cmd.getGeneratedKeys();
     			if (key.next()) {
     				usuario.setId(key.getInt(1));
@@ -67,7 +66,7 @@ public class UsuarioDAO{
         int row=0;
 
         try{   
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","null");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","Thaylles");
             String sql = "SELECT login, email, senha FROM usuarios WHERE id_usuario = ?;";
 
 			PreparedStatement cmd = c.prepareStatement(sql);
@@ -100,7 +99,7 @@ public class UsuarioDAO{
         
         try{   
         	
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","null");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","Thaylles");
             if (c != null){   
                 s = c.createStatement();
                 String sql = "SELECT id_usuario FROM usuarios where login = ? and senha=?;";

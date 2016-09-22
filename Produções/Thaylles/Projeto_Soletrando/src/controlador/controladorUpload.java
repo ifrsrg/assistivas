@@ -33,7 +33,8 @@ public class controladorUpload implements Route {
 			output.close();
 
 		}
-		
+		System.out.println("bin/publico/" + req.queryMap("nome").value() + ".mp3");
+		System.out.println(req.queryMap("nome").value());
 		UploadDAO.insertPalavras(req.queryMap("nome").value(), req.queryMap("nivel").integerValue(), "bin/publico/" + req.queryMap("nome").value() + ".mp3");
 		
 		resp.redirect("/login/home");
