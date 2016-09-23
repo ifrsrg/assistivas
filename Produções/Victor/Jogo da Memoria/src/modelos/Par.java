@@ -1,5 +1,8 @@
 package modelos;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Par {
 	
 	private Integer id;
@@ -19,6 +22,19 @@ public class Par {
 		this.form_img = form_img;
 		this.form_vid = form_vid;
 		this.nivel = nivel;
+	}
+	
+	public Par(ResultSet rs){
+		try {
+			id = rs.getInt("id_user");
+			nome = rs.getString("nome");
+			data = rs.getString("data");
+			form_img = rs.getString("form_img");
+			form_vid = rs.getString("form_vid");
+			nivel = rs.getInt("nivel");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Integer getId() {

@@ -1,7 +1,6 @@
 package web;
 
 import java.net.URLEncoder;
-
 import spark.Filter;
 import spark.Request;
 import spark.Response;

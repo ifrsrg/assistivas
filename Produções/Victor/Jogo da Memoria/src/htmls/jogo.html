@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <title>Jogo da Memória</title>
 
-<script type="text/javascript" src = 'js/jogo_script.js'></script>
 <script type="text/javascript" src = 'js/jquery-2.1.1.min.js'></script>
+<script type="text/javascript" src = 'js/jogo_script.js'></script>
 <link rel='stylesheet' href='css/style.css'>
-
 
 </head>
 <body>
+	<h1>Jogo da Memória</h1>
 	<div id = 'change'>
 		<table>
 			<tr>
@@ -65,12 +65,12 @@
 				</td>
 				<td colspan='2'>
 					<input type = 'radio' id='3B' name='tipo_pares' value='1'>
-					<label for='3A'>Jogar com pares de outros jogadores</label>
+					<label for='3B'>Jogar com pares de outros jogadores</label>
 				</td>
 			</tr>
 			<tr>
 				<th colspan = '4'>
-					<button onclick='carregarJogo()'>Jogar</button>
+					<button id='jogar'>Jogar</button>
 				</th>
 			</tr>
 		</table>
