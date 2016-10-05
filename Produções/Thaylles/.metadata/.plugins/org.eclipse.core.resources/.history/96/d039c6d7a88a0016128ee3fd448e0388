@@ -1,0 +1,19 @@
+#centro{
+	position: absolute;
+	top: 40%
+	left: 40%;
+}
+
+.container{
+	position: absolute;
+	top: 40%;
+	left: 20%;
+	max-width: 100%;
+}
+label{
+	color: black;
+}
+
+button{
+	width: 70px;
+}

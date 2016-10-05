@@ -48,6 +48,10 @@ public class Main {
 		TemplateViewRoute paginaUpload = upador.mostrar;
 		Spark.get("/login/upload", paginaUpload, engine);
 		
+		controladorJogo jogo = new controladorJogo();
+		TemplateViewRoute paginaJogo = jogo.mostrar;
+		Spark.get("/login/jogo", paginaJogo , engine);
+		
 		/*
 		Filter logadoB = new Filter(){
 			public void handle(Request req, Response resp){
@@ -62,7 +66,7 @@ public class Main {
 			}
 		};
 
-	Spark.before("/login/novoJogo", logadoB);
+	Spark.before("/login/jogo", logadoB);
 	Spark.before("/login/upload", logadoB);
 	Spark.before("/login/home", logadoB);	
 			*/

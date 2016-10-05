@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>Soletrando</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/estilo.css" rel="stylesheet">
+	<link href="../css/simple-sidebar.css" rel="stylesheet">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<a>
+					Soletrando
+				</a>
+			</li>
+			<li>
+				<a href="home"> HOME </a>
+			</li>
+		</ul>
+	</div>
+	<div id="centro">
+		<form action="/recebeaudio" method="post" enctype="multipart/form-data">
+			<div class="col-sm-3">
+				<input name="nome" type="name" required class="form-control" id="nome" placeholder="Digite a palavra">
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2">
+					<input type="file" required accept="audio/mp3" name="arquivo">
+				</div>
+				<div>
+					<br>
+					<br>
+					<br>
+					<p>Qual o nivel dessa palavra?</p>
+					<br>
+					Nivel 1
+					<input type="radio" name="nivel" value="1"><br>
+					Nivel 2
+					<input type="radio" name="nivel" value="2"><br>
+					Nivel 3
+					<input type="radio" name="nivel" value="3">
+				</div>
+			</div>
+			<br>
+			<br>			
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
