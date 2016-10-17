@@ -1,5 +1,6 @@
 package controladores;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,13 +11,13 @@ import java.util.HashMap;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
+import dao.ParDAO;
 import modelos.Par;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.TemplateViewRoute;
-import dao.ParDAO;
 
 public class Pares_Controlador {
 	
@@ -28,7 +29,7 @@ public class Pares_Controlador {
 		@Override
 		public Object handle(Request req, Response resp) throws Exception {
 			
-			MultipartConfigElement multipart = new MultipartConfigElement("/pub");
+			MultipartConfigElement multipart = new MultipartConfigElement("pub");
 						
 			req.raw().setAttribute("org.eclipse.multipartConfig", multipart);
 						
@@ -59,20 +60,25 @@ public class Pares_Controlador {
 		
 		
 		public boolean SalvaInputs(Part file, String tipo, int id, String nome, String time){
-			if (((tipo.equals("image")) && (file.getContentType().equals("image/jpeg") ||
+			
+			if (((tipo.equals("image")) && (file.getContentType().equals("image/jpeg")  ||
 										    file.getContentType().equals("image/png"))) ||
-				((tipo.equals("video")) && (file.getContentType().equals("video/mp4")  ||
-											file.getContentType().equals("video/mkv")  ||
-											file.getContentType().equals("video/avi")))) {
+				((tipo.equals("video")) && (file.getContentType().equals("video/mp4")   ||
+											file.getContentType().equals("video/mkv")   ||
+											file.getContentType().equals("video/avi")   ||
+											file.getContentType().equals("video/ogg")))) {
 				try {
 					
 					InputStream input = file.getInputStream();
-					FileOutputStream output = new FileOutputStream("bin/pub/" + tipo + "/" + id + "_" + nome + "_" + time + "." + file.getContentType().split("/")[1]);
+					String nome_file = id + "_" + nome + "_" + time + "." + file.getContentType().split("/")[1];
+					FileOutputStream output = new FileOutputStream("bin/pub/" + tipo + "/" + nome_file);
 					for (int i = input.read(); i >= 0; i = input.read()) {
 						output.write(i);
 					}
 					input.close();
 					output.close();
+					/*if (tipo.equals("video"))
+						converte(nome_file);*/
 					return true;
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -98,6 +104,19 @@ public class Pares_Controlador {
 			if (numero < 10) 
 				return "0"+numero;
 			return numero+"";
+		}
+		
+		protected void converte(String nome_file){
+			File f = new File("bin/pub/video/"+nome_file);
+			String nome = nome_file.substring(0, nome_file.length()-4);
+			String s = "ffmpeg -i " + nome_file + " " + nome + ".ogg";
+			try {
+				//Runtime.getRuntime().exec("cd bin/pub/video");
+				Runtime.getRuntime().exec(s);
+				f.delete();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}

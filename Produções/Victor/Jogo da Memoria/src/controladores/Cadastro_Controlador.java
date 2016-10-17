@@ -11,7 +11,6 @@ public class Cadastro_Controlador {
 	
 	class Salvar implements Route{
 
-		@Override
 		public Object handle(Request req, Response resp) throws Exception {
 			Usuario user = new Usuario(req.queryMap("nome").value(),
 									   req.queryMap("email").value(),
@@ -28,7 +27,6 @@ public class Cadastro_Controlador {
 	
 	class Mostrar implements TemplateViewRoute{
 
-		@Override
 		public ModelAndView handle(Request arg0, Response arg1) {
 			return new ModelAndView(null, "cadastro.html");
 		}

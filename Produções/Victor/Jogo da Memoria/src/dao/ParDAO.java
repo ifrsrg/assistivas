@@ -33,7 +33,7 @@ public class ParDAO {
 	public ArrayList<Par> offsets(int offset, int id){
 		Connection con = factory.getConnection();
 		try{
-			PreparedStatement cmd = con.prepareStatement("SELECT nome, data, form_img, form_vid, nivel FROM pares " +
+			PreparedStatement cmd = con.prepareStatement("SELECT * FROM pares " +
 														  " WHERE id_user = ?" +
 														  " LIMIT 6 OFFSET ?");
 			cmd.setInt(1, id);
@@ -139,6 +139,20 @@ public class ParDAO {
 			cmd.close();
 			rs.close();
 			return array;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Object delete(String id) {
+		Connection con = factory.getConnection();
+		try {
+			PreparedStatement cmd = con.prepareStatement("DELETE FROM pares WHERE data = ?;");
+			cmd.setString(1, id);
+			Boolean result = cmd.execute();
+			cmd.close();
+			con.close();
+			return result;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

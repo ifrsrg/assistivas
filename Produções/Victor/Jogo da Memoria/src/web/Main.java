@@ -1,37 +1,44 @@
 package web;
 
 import java.net.URLEncoder;
-import spark.Filter;
-import spark.Request;
-import spark.Response;
-import spark.Spark;
-import spark.template.mustache.MustacheTemplateEngine;
+
+import Service.WebServicePares;
+import Service.WebServiceUsers;
 import controladores.Cadastro_Controlador;
 import controladores.Home_controlador;
 import controladores.Jogo_Controlador;
 import controladores.JsonTransformer;
 import controladores.Menu_controlador;
-import controladores.Offset_Controlador;
-import controladores.ParesJogo_Controlador;
 import controladores.Pares_Controlador;
 import controladores.UploadsListaControlador;
 import controladores.Usuarios_Controlador;
+import spark.Filter;
+import spark.Request;
+import spark.Response;
+import spark.Spark;
+import spark.template.mustache.MustacheTemplateEngine;
 
 public class Main {
 
 	public static void main(String[] args) {
 				
+		//String s = "ffmpeg -i "+n+" "+n+".ogg";
+		//Runtime.getRuntime().exec(s);
+		
+		
 		Spark.staticFileLocation("/pub");
 		
 		MustacheTemplateEngine engine = new MustacheTemplateEngine("htmls");
-		JsonTransformer jsonengine = new JsonTransformer();
+		
+		WebServicePares wsp = new WebServicePares();
+		WebServiceUsers wsu = new WebServiceUsers();
 		
 		Filter logado = new Filter(){
 
 			@Override
 			public void handle(Request req, Response resp) throws Exception {
 				if (req.session().attribute("user") == null) {
-					String erro = URLEncoder.encode("Você deve estar logado", "UTF-8");
+					String erro = URLEncoder.encode("VocÃª deve estar logado", "UTF-8");
 					resp.redirect("/home?erro=" + erro);
 				}
 			}
@@ -71,18 +78,16 @@ public class Main {
 		
 		Usuarios_Controlador users = new Usuarios_Controlador();
 		
-		Spark.get("/users/:login", "application/json", users, jsonengine);
-		
-		Offset_Controlador offsets = new Offset_Controlador();
-		
-		Spark.get("/offsets/:offset", "application/json", offsets, jsonengine);
-		
 		Jogo_Controlador jogo_controlador = new Jogo_Controlador();
 		
 		Spark.get("/jogar", jogo_controlador.getTemplateView(), engine);
 		
-		ParesJogo_Controlador pares_jogo = new ParesJogo_Controlador();
+		Spark.get("/users/:login", wsu.contentType, wsu.userLogin, wsu.responseTransformer);
 		
-		Spark.get("/paresjogo/:nivel/:quant/:teste", "application/json", pares_jogo, jsonengine);
+		Spark.get("/offsets/:offset", wsp.contentType, wsp.offsets, wsp.responseTransformer);
+				
+		Spark.get("/paresjogo/:nivel/:quant/:teste", wsp.contentType, wsp.paresJogo, wsp.responseTransformer);
+		
+		Spark.post("/remove/:id", wsp.delete);
 	}
 }
