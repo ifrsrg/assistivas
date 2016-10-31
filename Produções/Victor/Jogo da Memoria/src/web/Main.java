@@ -5,13 +5,14 @@ import java.net.URLEncoder;
 import Service.WebServicePares;
 import Service.WebServiceUsers;
 import controladores.Cadastro_Controlador;
+import controladores.EditarPar_Controlador;
 import controladores.Home_controlador;
 import controladores.Jogo_Controlador;
-import controladores.JsonTransformer;
 import controladores.Menu_controlador;
 import controladores.Pares_Controlador;
 import controladores.UploadsListaControlador;
-import controladores.Usuarios_Controlador;
+import dao.ParDAO;
+import modelos.Par;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -22,9 +23,17 @@ public class Main {
 
 	public static void main(String[] args) {
 				
-		//String s = "ffmpeg -i "+n+" "+n+".ogg";
-		//Runtime.getRuntime().exec(s);
-		
+		/*String s = "ffmpeg -i "+n+" "+n+".ogg";
+		try {
+			//String[] cmds = {("cd bin/"), ("mkdir pasta_ilegal")};
+			File f = new File("bin/pub/video/");
+			//Runtime.getRuntime().exec("mkdir bin/pasta_legal"); funfa
+			
+			Runtime.getRuntime().exec("ffmpeg -i movie.mp4 movie.ogg", null, f);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/	
 		
 		Spark.staticFileLocation("/pub");
 		
@@ -44,10 +53,26 @@ public class Main {
 			}
 		};
 		
+		Filter dono_par = new Filter(){
+
+			@Override
+			public void handle(Request req, Response resp) throws Exception {
+				ParDAO dao = new ParDAO();
+				
+				Par par = dao.selectByData(req.params("data"));
+				
+				if (par.getId() != req.session().attribute("user")) {
+					resp.redirect("/menu");
+				}
+			}		
+		};
+		
 		Spark.before("/menu", logado);
 		Spark.before("/meusUploads", logado);
 		Spark.before("/novoPar", logado);
 		Spark.before("/offsets/:offset", logado);
+		Spark.before("/editarPar/:data", logado);
+		Spark.before("/editarPar/:data", dono_par);
 		
 		Home_controlador home = new Home_controlador();
 		
@@ -75,12 +100,16 @@ public class Main {
 		Spark.get("/novoPar", pares.getTemplateView(), engine);
 		
 		Spark.post("/novoPar", pares.getRoute());
-		
-		Usuarios_Controlador users = new Usuarios_Controlador();
-		
+				
 		Jogo_Controlador jogo_controlador = new Jogo_Controlador();
 		
 		Spark.get("/jogar", jogo_controlador.getTemplateView(), engine);
+		
+		EditarPar_Controlador editarPar = new EditarPar_Controlador();
+		
+		Spark.get("/editarPar/:data", editarPar.getMostrar(), engine);
+		
+		Spark.post("/editarPar/:data", editarPar.getSalvar());
 		
 		Spark.get("/users/:login", wsu.contentType, wsu.userLogin, wsu.responseTransformer);
 		

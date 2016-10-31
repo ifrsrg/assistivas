@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Editar</title>
+</head>
+<body>
+
+	<h1>Editar</h1>
+	
+	<form method = 'post' action='/editarPar/{{data}}' enctype="multipart/form-data">
+	
+		<table>
+			<tr>
+				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}}></td>
+				<td>
+					<span>Nível de dificuldade: </span>
+					<select name = 'nivel'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><video width='320' height='240' src=''></td>
+				<td><img width='320' height='240' src=''></td>
+			</tr>
+			<tr>
+				<td>Mudar imagem:</td>
+				<td>Mudar video:</td>
+			</tr>
+			<tr>
+				<td><input type = 'file' name='foto' value='Mudar video'></td>
+				<td><input type = 'file' name='foto' value='Mudar imagem'></td>
+			</tr>
+			<tr>
+				<td colspan='2'><input type='submit' value='Concluir edição'></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

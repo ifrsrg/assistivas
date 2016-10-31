@@ -144,7 +144,7 @@ public class ParDAO {
 		}
 	}
 
-	public Object delete(String id) {
+	public Boolean delete(String id) {
 		Connection con = factory.getConnection();
 		try {
 			PreparedStatement cmd = con.prepareStatement("DELETE FROM pares WHERE data = ?;");
@@ -154,8 +154,24 @@ public class ParDAO {
 			con.close();
 			return result;
 		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	public Par selectByData(String data) {
+		Connection con = factory.getConnection();
+		
+		try{
+			PreparedStatement cmd = con.prepareStatement("SELECT * FROM pares WHERE data = ?");
+			cmd.setString(1, data);
+			ResultSet rs = cmd.executeQuery();
+			if (rs.next())
+				return new Par(rs);
+		} catch(Exception e){
 			throw new RuntimeException(e);
 		}
+		return null;
 	}
 	
 }

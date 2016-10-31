@@ -37,6 +37,10 @@ public class Par {
 		}
 	}
 	
+	/*public String toVideoNameFile(){
+		return id + "_" + nome + "_" + data + "." + form_vid;
+	}*/
+	
 	public Integer getId() {
 		return id;
 	}
