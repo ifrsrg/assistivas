@@ -38,23 +38,6 @@ public class ParDAO {
 														  " LIMIT 6 OFFSET ?");
 			cmd.setInt(1, id);
 			cmd.setInt(2, offset);
-			/*ResultSet rs = cmd.executeQuery();
-			
-			ArrayList<Par> array = new ArrayList<Par>();
-			
-			while (rs.next()) {
-				Par par = new Par();
-				par.setId(id);
-				par.setNome(rs.getString("nome"));
-				par.setData(rs.getString("data"));
-				par.setForm_img(rs.getString("form_img"));
-				par.setForm_vid(rs.getString("form_vid"));
-				par.setNivel(rs.getInt("nivel"));
-				array.add(par);
-			}
-			
-			return array;*/
-			
 			ArrayList<Par> array = preencheArray(cmd);
 			con.close();
 			return array;
@@ -149,13 +132,13 @@ public class ParDAO {
 		try {
 			PreparedStatement cmd = con.prepareStatement("DELETE FROM pares WHERE data = ?;");
 			cmd.setString(1, id);
-			Boolean result = cmd.execute();
+			cmd.execute();
 			cmd.close();
 			con.close();
-			return result;
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return true;
+			return false;
 		}
 	}
 
@@ -172,6 +155,33 @@ public class ParDAO {
 			throw new RuntimeException(e);
 		}
 		return null;
+	}
+	
+	public void update(Par par){
+		Connection con = factory.getConnection();
+		
+		try{
+			String sql = "UPDATE pares SET nome = ?, nivel = ?";
+			if (par.getForm_img() != null) {
+				sql += ", form_img = ?";
+			}
+			sql += " WHERE data = ?;";
+			PreparedStatement cmd = con.prepareStatement(sql);
+			cmd.setString(1, par.getNome());
+			cmd.setInt(2, par.getNivel());
+			if (par.getForm_img() != null) {
+				cmd.setString(3, par.getForm_img());
+				cmd.setString(4, par.getData());
+			}else{
+				cmd.setString(3, par.getData());
+			}
+			
+			cmd.execute();
+			cmd.close();
+			con.close();
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

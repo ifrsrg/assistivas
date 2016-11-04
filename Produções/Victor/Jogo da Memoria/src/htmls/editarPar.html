@@ -2,6 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link href='/bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
+
+<link href='/css/style.css' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src = '/js/jquery-2.1.1.min.js'></script>
+
+<script type="text/javascript" src = '/js/editar.js'></script>
+
 <title>Editar</title>
 </head>
 <body>
@@ -12,10 +21,10 @@
 	
 		<table>
 			<tr>
-				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}}></td>
+				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}} required></td>
 				<td>
 					<span>Nível de dificuldade: </span>
-					<select name = 'nivel'>
+					<select name = 'nivel' value={{nivel}}>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
 						<option value='3'>3</option>
@@ -24,16 +33,16 @@
 			</tr>
 			
 			<tr>
-				<td><video width='320' height='240' src=''></td>
-				<td><img width='320' height='240' src=''></td>
+				<td><img width='320' height='240' src='/image/{{id}}_{{nome}}_{{data}}.{{form_img}}'></td>
+				<td><video width='320' height='240' src='/video/{{id}}_{{nome}}_{{data}}.ogg' controls></td>
 			</tr>
 			<tr>
 				<td>Mudar imagem:</td>
 				<td>Mudar video:</td>
 			</tr>
 			<tr>
-				<td><input type = 'file' name='foto' value='Mudar video'></td>
 				<td><input type = 'file' name='foto' value='Mudar imagem'></td>
+				<td><input type = 'file' name='video' value='Mudar video'></td>
 			</tr>
 			<tr>
 				<td colspan='2'><input type='submit' value='Concluir edição'></td>

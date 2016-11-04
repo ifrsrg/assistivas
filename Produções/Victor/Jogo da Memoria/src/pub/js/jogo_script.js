@@ -6,7 +6,6 @@ var viradas = 0;
 $(document).ready(function(){
 
     $("#jogar").on("click", function(){
-    	alert("hey you");
         carregarJogo();
     });
 
@@ -15,12 +14,10 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#novo", function(){
-    	alert("rebel rebel");
         jogar_novamente();
     });
 
     $(document).on("click", "#voltar", function(){
-    	alert("changes");
         toMenu();
     });
 
@@ -41,7 +38,6 @@ function montar(tamanho){ //monta o HTML através do innerHTML
 
     elemento.id = "jogo";
 
-    alert(tamanho);
 
     switch(tamanho){
         case "6":  linhas = 2;
@@ -92,8 +88,6 @@ function montar(tamanho){ //monta o HTML através do innerHTML
 
 function carregaPares(vetor){
     pares = JSON.parse(vetor);
-    alert(pares);
-    alert(getTamanho());
     if (pares.length < getTamanho()) {
         toMenu();
     }else{
@@ -107,7 +101,6 @@ function forma_nome(par, ext){
 
 function joga(element){
     if (selecionadas.length === 2 && (tabuleiro[selecionadas[0]] !== tabuleiro[selecionadas[1]])) {
-        alert("in");
         clearTimeout(tenta);
         limpa();
     }
@@ -118,16 +111,13 @@ function joga(element){
         if (ext == 0) {
             item.src = "image/" + forma_nome(pares[numero], pares[numero].form_img);
         }else{
-            element.innerHTML = "<video class='carta' autoplay><source src='video/"
-                                 + forma_nome(pares[numero], pares[numero].form_vid) + "' type='video/"+
-                                 pares[numero].form_vid+"'></video>";
+            element.innerHTML = "<video class='carta' src='/video/" + forma_nome(pares[numero], "ogg") + "' controls autoplay muted></video>";
         }
         selecionadas[selecionadas.length] = numero;
         if (selecionadas.length === 2){
             if (selecionadas[0] !== selecionadas[1]){
                 tenta = setTimeout(function(){limpa();}, 3000);
             }else{
-                alert("hey");
                 viradas++;
                 if (viradas === pares.length)
                     venceu();
@@ -169,7 +159,6 @@ function limpa(){
 
 function Ajax(nivel, tamanho, tipo_pares){
     var url = "http://localhost:4567/paresjogo/"+nivel+"/"+tamanho+"/"+tipo_pares;
-    alert(url)
     $.get(url, carregaPares);
     
 }
@@ -195,6 +184,5 @@ function getChecked(vetor){
 }
 
 function toMenu(){
-	alert("ó o danadao");
     window.location = "http://localhost:4567/menu";
 }

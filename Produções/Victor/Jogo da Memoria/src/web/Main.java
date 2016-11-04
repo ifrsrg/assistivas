@@ -22,18 +22,6 @@ import spark.template.mustache.MustacheTemplateEngine;
 public class Main {
 
 	public static void main(String[] args) {
-				
-		/*String s = "ffmpeg -i "+n+" "+n+".ogg";
-		try {
-			//String[] cmds = {("cd bin/"), ("mkdir pasta_ilegal")};
-			File f = new File("bin/pub/video/");
-			//Runtime.getRuntime().exec("mkdir bin/pasta_legal"); funfa
-			
-			Runtime.getRuntime().exec("ffmpeg -i movie.mp4 movie.ogg", null, f);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/	
 		
 		Spark.staticFileLocation("/pub");
 		

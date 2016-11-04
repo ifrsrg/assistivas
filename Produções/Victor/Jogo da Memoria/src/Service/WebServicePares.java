@@ -4,10 +4,11 @@ import controladores.JsonTransformer;
 import dao.ParDAO;
 import spark.Request;
 import spark.Response;
-import spark.Route;
+import tools.FileManager;
 
 public class WebServicePares extends WebService{
 	
+	FileManager f = new FileManager();
 	ParDAO dao = new ParDAO();
 
 	public WebServicePares() {
@@ -35,12 +36,6 @@ public class WebServicePares extends WebService{
 			int valor_teste = Integer.parseInt(req.params("teste"));
 			boolean teste = true;
 			if (valor_teste == 1) teste = false;
-			if (teste) {
-				System.out.println("funfo");
-			}else{
-				System.out.println("sad");
-			}
-			System.out.println(nivel + "-" + quant + "-" + teste);
 			if (id_user == null || teste) {
 				if (nivel != 0)
 					return dao.randomPares(nivel, quant);
@@ -60,7 +55,10 @@ public class WebServicePares extends WebService{
 
 		@Override
 		public Object deal(Request req, Response resp) throws Exception {
-			return dao.delete(req.params("id"));
+			String timestamp = req.params("id");
+			f.delete(timestamp, "video");
+			f.delete(timestamp, "image");
+			return dao.delete(timestamp);
 		}
 		
 	};
