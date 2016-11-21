@@ -10,16 +10,18 @@ import javax.servlet.http.Part;
 public class FileManager {
 
 	public boolean save(Part file, String tipo, int id, String nome, String timestamp){
-				
+						
 		if (((tipo.equals("image")) && (file.getContentType().equals("image/jpeg")  ||
 									    file.getContentType().equals("image/png"))) ||
 			((tipo.equals("video")) && (file.getContentType().equals("video/mp4")   ||
 										file.getContentType().equals("video/mkv")   ||
 										file.getContentType().equals("video/avi")   ||
-										file.getContentType().equals("video/ogg")))) {
+										file.getContentType().equals("video/ogg")   ||
+										file.getContentType().equals("video/x-msvideo")))) {
 			try {
 			
 				InputStream input = file.getInputStream();
+				nome = nome.replace(" ", "_");
 				String nome_file = id + "_" + nome + "_" + timestamp + "." + file.getContentType().split("/")[1];
 				FileOutputStream output = new FileOutputStream("bin/pub/" + tipo + "/" + nome_file);
 				for (int i = input.read(); i >= 0; i = input.read()) {

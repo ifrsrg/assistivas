@@ -37,5 +37,10 @@ function rowNum(){
 }
 
 function toNameFile(item, formato){
-	return item.id + "_" + item.nome + "_" + item.data + "." + formato;
+	return item.id + "_" + rename(item.nome) + "_" + item.data + "." + formato;
+}
+
+function rename(nome){
+	var res =  nome.replace(new RegExp(" ", 'g'), "_");
+	return res;
 }

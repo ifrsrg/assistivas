@@ -47,7 +47,7 @@ public class ParDAO {
 		}
 	}
 	
-	public ArrayList<Par> randomPares(int nivel, int quant, Integer id){
+	public ArrayList<Par> randomPares(Integer id, int nivel, int quant){
 		Connection con = factory.getConnection();
 		String sql = "SELECT * FROM pares WHERE nivel = ? AND id_user = ? ORDER BY RANDOM() LIMIT ?;";
 				

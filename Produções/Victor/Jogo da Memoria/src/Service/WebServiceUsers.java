@@ -21,6 +21,17 @@ public class WebServiceUsers extends WebService{
 		}
 	};
 	
-	
+	public final Service logado = new Service(){
 
+		@Override
+		public Object deal(Request req, Response resp) throws Exception {
+			Integer user = req.session().attribute("user");
+			if (user == null){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+	};
 }

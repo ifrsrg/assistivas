@@ -34,18 +34,23 @@ public class WebServicePares extends WebService{
 			int nivel = Integer.parseInt(req.params("nivel"));
 			int quant = Integer.parseInt(req.params("quant"));
 			int valor_teste = Integer.parseInt(req.params("teste"));
-			boolean teste = true;
-			if (valor_teste == 1) teste = false;
+			boolean teste = false;
+			if (valor_teste == 1) teste = true;
+			
 			if (id_user == null || teste) {
-				if (nivel != 0)
+				if (nivel != 0){
 					return dao.randomPares(nivel, quant);
-				else
+				}
+				else{
 					return dao.randomPares(quant);
+				}
 			}else{
-				if (nivel != 0) 
+				if (nivel != 0){
 					return dao.randomPares(id_user, nivel, quant);
-				else
+				}
+				else{
 					return dao.randomParesUser(id_user, quant);
+				}
 			}
 		}
 		

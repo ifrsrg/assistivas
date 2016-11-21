@@ -4,7 +4,8 @@ CREATE TABLE pares (
 	nome 		VARCHAR(20) NOT NULL,
 	data 		VARCHAR(15) NOT NULL PRIMARY KEY,
 	form_img	VARCHAR(5) NOT NULL,
-	form_vid	VARCHAR(5) NOT NULL
+	form_vid	VARCHAR(5) NOT NULL,
+	nivel		SMALLINT NOT NULL
 );
 
 CREATE TABLE usuarios(

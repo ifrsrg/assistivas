@@ -1,7 +1,6 @@
 package web;
 
 import java.net.URLEncoder;
-
 import Service.WebServicePares;
 import Service.WebServiceUsers;
 import controladores.Cadastro_Controlador;
@@ -88,7 +87,7 @@ public class Main {
 		Spark.get("/novoPar", pares.getTemplateView(), engine);
 		
 		Spark.post("/novoPar", pares.getRoute());
-				
+		
 		Jogo_Controlador jogo_controlador = new Jogo_Controlador();
 		
 		Spark.get("/jogar", jogo_controlador.getTemplateView(), engine);
@@ -101,8 +100,10 @@ public class Main {
 		
 		Spark.get("/users/:login", wsu.contentType, wsu.userLogin, wsu.responseTransformer);
 		
+		Spark.get("/logado", wsu.contentType, wsu.logado, wsu.responseTransformer);
+		
 		Spark.get("/offsets/:offset", wsp.contentType, wsp.offsets, wsp.responseTransformer);
-				
+		
 		Spark.get("/paresjogo/:nivel/:quant/:teste", wsp.contentType, wsp.paresJogo, wsp.responseTransformer);
 		
 		Spark.post("/remove/:id", wsp.delete);

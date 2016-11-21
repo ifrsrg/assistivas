@@ -4,8 +4,10 @@ var selecionadas = [];
 var viradas = 0;
 
 $(document).ready(function(){
-
-    $("#jogar").on("click", function(){
+	
+	checar();
+	
+    $(document).on("click", "#jogar", function(){
         carregarJogo();
     });
 
@@ -19,6 +21,10 @@ $(document).ready(function(){
 
     $(document).on("click", "#voltar", function(){
         toMenu();
+    });
+    
+    $(document).on("click", "#3A", function(){
+    	checar();
     });
 
 });
@@ -96,7 +102,12 @@ function carregaPares(vetor){
 }
 
 function forma_nome(par, ext){
-    return par.id + "_" + par.nome + "_" + par.data + "." + ext;
+    return par.id + "_" + rename(par.nome) + "_" + par.data + "." + ext;
+}
+
+function rename(nome){
+	var res =  nome.replace(new RegExp(" ", 'g'), "_");
+	return res;
 }
 
 function joga(element){
@@ -142,6 +153,7 @@ function jogar_novamente(){
                                                   "<input type = 'radio' id='3A' name='tipo_pares' value='0'><label for='3A'>Jogar com meus pares</label></td>"+
                                                   "<td colspan='2'><input type = 'radio' id='3B' name='tipo_pares' value='1'><label for='3A'>Jogar com pares de outros jogadores</label>"+
                                                   "</td></tr><tr><th colspan = '4'><button id='jogar'>Jogar</button></th></tr>";
+    checar();
 }
 
 function venceu(){
@@ -185,4 +197,14 @@ function getChecked(vetor){
 
 function toMenu(){
     window.location = "http://localhost:4567/menu";
+}
+
+function checar(){
+	$.getJSON("http://localhost:4567/logado", verifica);
+}
+
+function verifica(teste){
+	if (teste != true) {
+		$("#3B").click();
+	}
 }
