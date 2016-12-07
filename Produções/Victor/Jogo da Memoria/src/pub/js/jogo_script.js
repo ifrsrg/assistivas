@@ -12,7 +12,9 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".posicoes", function(){
-        joga(this);
+    	if (selecionadas.length != 2) {
+            joga(this);
+		}
     });
 
     $(document).on("click", "#novo", function(){
@@ -63,7 +65,7 @@ function montar(tamanho){ //monta o HTML através do innerHTML
     for(var i = 0; i < linhas; i++){
         change += "<tr>";
         for(var j = 0; j < colunas; j++){
-            change += "<td class='posicoes'></td>";
+            change += "<td class='posicoes' virado=false></td>";
         }
     }
 
@@ -76,12 +78,13 @@ function montar(tamanho){ //monta o HTML através do innerHTML
         var pos = posicoes[random_num];
         if (pos.innerHTML === "") {
             pos.setAttribute("data-id", count);
-            if (vezes ==  0) 
+            if (vezes ==  0){
                 pos.setAttribute("data-ext", 0);
-            else
+            	pos.innerHTML = "<img class='carta' src='covers/image_cover.jpg'>";
+            }else{
                 pos.setAttribute("data-ext", 1);
-            
-            pos.innerHTML = "<img class='carta' src='image/cover.jpg'>";
+            	pos.innerHTML = "<img class='carta' src='covers/video_cover.png'>";
+            }
             tabuleiro[random_num] = pares[count];
             vezes++;
         }
@@ -111,31 +114,57 @@ function rename(nome){
 }
 
 function joga(element){
-    if (selecionadas.length === 2 && (tabuleiro[selecionadas[0]] !== tabuleiro[selecionadas[1]])) {
-        clearTimeout(tenta);
-        limpa();
-    }
     var numero = $(element).attr("data-id");
-    var item = element.children[0];
-    if (item.src.endsWith("cover.jpg")){
+    if ($(element).attr("virado") == 'false' && ($(element).attr("data-ext") != $(selecionadas[0]).attr("data-ext") || selecionadas.length == 0)){
+        var item = element.children[0];
         var ext = element.getAttribute("data-ext");
         if (ext == 0) {
             item.src = "image/" + forma_nome(pares[numero], pares[numero].form_img);
         }else{
             element.innerHTML = "<video class='carta' src='/video/" + forma_nome(pares[numero], "ogg") + "' controls autoplay muted></video>";
         }
-        selecionadas[selecionadas.length] = numero;
+        $(element).attr("virado", true);
+        selecionadas[selecionadas.length] = element;
         if (selecionadas.length === 2){
             if (selecionadas[0] !== selecionadas[1]){
-                tenta = setTimeout(function(){limpa();}, 3000);
+            	$("#jogo").css("background-color", "red");
+            	achou = setTimeout(function(){limpa(false);}, 3000);
             }else{
                 viradas++;
+                $("#jogo").css("background-color", "green");
+            	achou = setTimeout(function(){limpa(true);}, 3000);
                 if (viradas === pares.length)
                     venceu();
                 selecionadas = [];
             }
         }
     }
+}
+
+
+function limpa(estado){
+	$("#jogo").css("background-color", "#FFB600");
+	if (estado == false) {	
+	    for (var i = 0; i < selecionadas.length; i++) {
+	    	var element = $(selecionadas[i]);
+	        element.attr("virado", false);
+	        if (element.attr("data-ext") == '0') {
+	        	element.html("<img class='carta' src='covers/image_cover.jpg'>"); 
+			}else{
+				element.html("<img class='carta' src='covers/video_cover.png'>");  
+			}
+	    }
+	    selecionadas=[];
+	}
+}
+
+function mudaCor(achou){
+	var tabuleiro = $("#jogo");
+	if (estado = 'true') {
+		tabuleiro.css("background-color", "green");
+	}else{
+		tabuleiro.css("background-color", "red");
+	}
 }
 
 function jogar_novamente(){
@@ -162,12 +191,6 @@ function venceu(){
     body.innerHTML += "<button id='novo'>Jogar Novamente</button><button id='voltar'>Voltar ao menu</button>";
 }
 
-function limpa(){
-    for (var i = 0; i < selecionadas.length; i++) {
-        $("td[data-id="+ selecionadas[i] +"]").html("<img class='carta' src='image/cover.jpg'>");    
-    }
-    selecionadas=[];
-}
 
 function Ajax(nivel, tamanho, tipo_pares){
     var url = "http://localhost:4567/paresjogo/"+nivel+"/"+tamanho+"/"+tipo_pares;

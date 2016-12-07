@@ -5,16 +5,25 @@ $(function(){
 	$('#botao').on('click', function(){
 		$.getJSON("/offsets/"+rowNum(), lista);
 	});
+	
+	$(document).on('click', '.remover', function(){
+		remove(this);
+	});
 });
 
 
 function lista(vetor){
+	
+	if (vetor.length == 0) {
+		$("body").append("<h4>Você não possui pares</h4>");
+	}
+	
 	var table = document.getElementsByTagName("table")[0];
 		
 	for (var i = 0; i < 5 && vetor[i] != undefined; i++) {
 		table.innerHTML += "<tr><td colspan='2' class='item'>"+vetor[i].nome+" Nível: "+vetor[i].nivel+"</td></tr><tr><td><img width='320' height='240' src=/image/" +
 						   toNameFile(vetor[i], vetor[i].form_img) + "></td>" +"<td><video width='320' height='240' src = 'video/"+toNameFile(vetor[i], "ogg") +"' controls>"+
-						   "</video></td></tr><tr><td><button onclick='remove(this, " + vetor[i].data+")'>Remover</button></td>" + 
+						   "</video></td></tr><tr><td><button class='remover' id_data = "+ vetor[i].data +" >Remover</button></td>" + 
 				     	   "<td><a href = '/editarPar/" + vetor[i].data + "'><button>Editar</button></a></td></tr>";
 	}
 	var botao = document.getElementById("botao");
@@ -25,11 +34,9 @@ function lista(vetor){
 	}
 }
 
-function remove(element, id){
-	alert(id);
+function remove(element){
 	$(element).parent().parent().parent().hide(250);
-	$.post("/remove/"+ id , function(){});
-
+	$.post("/remove/"+ $(element).attr("id_data") , function(){});
 }
 
 function rowNum(){

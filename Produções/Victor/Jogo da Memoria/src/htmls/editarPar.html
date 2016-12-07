@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="cache-control" content="no-cache">
+
 <meta charset="UTF-8">
 
 <!--<link href='/bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>-->
@@ -11,17 +13,19 @@
 
 <script type="text/javascript" src = '/js/editar.js'></script>
 
+<script type="text/javascript" src = '/js/errorMessage.js'></script>
+
 <title>Editar</title>
 </head>
 <body>
-
+	
 	<h1>Editar</h1>
 	
-	<form method = 'post' action='/editarPar/{{data}}' enctype="multipart/form-data">
+	<form method = 'post' action='/editarPar/{{data}}' enctype="multipart/form-data" onsubmit='return verifica()'>
 	
 		<table>
 			<tr>
-				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}} required></td>
+				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}} onblur='verificaNome(this)' required></td>
 				<td>
 					<span>Nível de dificuldade: </span>
 					<select name = 'nivel' value={{nivel}}>
@@ -45,9 +49,11 @@
 				<td><input type = 'file' name='video' value='Mudar video'></td>
 			</tr>
 			<tr>
-				<td colspan='2'><input type='submit' value='Concluir edição'></td>
+				<td colspan='2'><input type='submit' id = 'button' value='Concluir edição'></td>
 			</tr>
 		</table>
 	</form>
+	
+	<span style='display:none;'>{{nome}}</span>
 </body>
 </html>

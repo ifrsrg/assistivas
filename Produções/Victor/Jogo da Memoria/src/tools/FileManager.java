@@ -41,20 +41,36 @@ public class FileManager {
 	}
 	
 	public boolean update(Part file, String tipo, int id, String nome, String timestamp){
-		if (file.getContentType().equals("application/octet-stream"))
+		
+		File dir = getDir(tipo);
+		
+		for  (File f : dir.listFiles()){
+			String name_file = f.getName();
+			if (name_file.contains(timestamp)) {
+				String[] array = name_file.split("_");
+				array[1] = nome.replaceAll(" ", "_");
+				f.renameTo(new File(dir, array[0] + "_" + array[1] + "_" + array[2]));
+			}
+		}
+		
+		if (file.getContentType().equals("application/octet-stream")){
 			return false;
+		}
 		delete(timestamp, tipo);
 		return save(file, tipo, id, nome, timestamp);
 	}
 	
-	public void delete(String timestamp, String tipo){
-		File dir;
-		
+	private File getDir(String tipo){		
 		if (tipo.equals("video")) {
-			dir = new File("bin/pub/video/");
+			return new File("bin/pub/video/");
 		}else{
-			dir = new File("bin/pub/image/");
+			return new File("bin/pub/image/");
 		}
+	}
+	
+	public void delete(String timestamp, String tipo){
+		
+		File dir = getDir(tipo);
 		
 		for (File file : dir.listFiles()) {
 			if (file.getName().contains(timestamp)) {

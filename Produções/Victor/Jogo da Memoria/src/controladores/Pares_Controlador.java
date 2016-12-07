@@ -51,7 +51,7 @@ public class Pares_Controlador {
 				Par par = new Par(req.session().attribute("user"), nome, time, form_img, form_vid, nivel);
 				ParDAO parDAO = new ParDAO();
 				parDAO.save(par);
-				resp.redirect("/menu");
+				resp.redirect("/meusUploads");
 			}else{
 				String erro = URLEncoder.encode("Formatos de arquivo incorretos", "UTF-8");
 				resp.redirect("/novoPar?erro="+erro);

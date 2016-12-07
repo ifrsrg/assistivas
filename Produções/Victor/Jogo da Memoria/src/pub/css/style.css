@@ -1,5 +1,5 @@
 table{
-	background-color: #FF4900;
+	background-color: #FFB600;
 	border-radius: 10px;
 }
 
@@ -23,4 +23,12 @@ a{
 .carta{
 	width: 170px;
 	height: 220px;
+}
+
+#aviso{
+	display: none;
+}
+
+.erro{
+	display: none;
 }

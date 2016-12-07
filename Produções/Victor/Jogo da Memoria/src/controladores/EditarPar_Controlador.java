@@ -55,7 +55,7 @@ public class EditarPar_Controlador {
 			par.setData(data);
 			
 			FileManager f = new FileManager();
-			
+						
 			f.update(image, "image", id, nome, data);
 			f.update(video, "video", id, nome, data);
 			
@@ -70,7 +70,7 @@ public class EditarPar_Controlador {
 			ParDAO parDAO = new ParDAO();
 				
 			parDAO.update(par);
-			resp.redirect("/menu");
+			resp.redirect("/meusUploads");
 			return null;
 			
 			}

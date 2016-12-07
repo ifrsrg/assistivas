@@ -16,12 +16,6 @@ public class ParesJogo_Controlador implements Route{
 		int valor_teste = Integer.parseInt(req.params("teste"));
 		boolean teste = true;
 		if (valor_teste == 1) teste = false;
-		if (teste) {
-			System.out.println("funfo");
-		}else{
-			System.out.println("sad");
-		}
-		System.out.println(nivel + "-" + quant + "-" + teste);
 		if (id_user == null || teste) {
 			if (nivel != 0)
 				return dao.randomPares(nivel, quant);

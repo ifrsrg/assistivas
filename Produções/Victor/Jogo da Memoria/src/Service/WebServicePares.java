@@ -68,4 +68,14 @@ public class WebServicePares extends WebService{
 		
 	};
 	
+	public final Service selectAll = new Service(){
+
+		@Override
+		public Object deal(Request req, Response resp) throws Exception {
+			Integer id_user = req.session().attribute("user");
+			return dao.selectAll(id_user);
+		}
+		
+	};
+	
 }

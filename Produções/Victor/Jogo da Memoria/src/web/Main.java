@@ -30,7 +30,7 @@ public class Main {
 		WebServiceUsers wsu = new WebServiceUsers();
 		
 		Filter logado = new Filter(){
-
+		
 			@Override
 			public void handle(Request req, Response resp) throws Exception {
 				if (req.session().attribute("user") == null) {
@@ -105,6 +105,8 @@ public class Main {
 		Spark.get("/offsets/:offset", wsp.contentType, wsp.offsets, wsp.responseTransformer);
 		
 		Spark.get("/paresjogo/:nivel/:quant/:teste", wsp.contentType, wsp.paresJogo, wsp.responseTransformer);
+		
+		Spark.get("/selectAll", wsp.contentType, wsp.selectAll, wsp.responseTransformer);
 		
 		Spark.post("/remove/:id", wsp.delete);
 	}

@@ -183,5 +183,22 @@ public class ParDAO {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public Object selectAll(Integer id_user) {
+		Connection con = factory.getConnection();
+		ArrayList<String> retorno = new ArrayList<String>();
+		try {
+			PreparedStatement cmd = con.prepareStatement("SELECT nome FROM pares WHERE id_user = ?");
+			cmd.setInt(1, id_user);
+			ResultSet rs = cmd.executeQuery();
+			while(rs.next()){
+				retorno.add(rs.getString("nome"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return retorno;
+	}
 	
 }

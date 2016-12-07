@@ -1,10 +1,3 @@
-$(document).ready(function(){
-	var nivel = $("select").attr("value");
-	
-	$('select option[value='+nivel+']').attr('selected','selected');
-	
-});
-
 var valida;
 
 function verificaNome(){
@@ -20,8 +13,8 @@ function verificaNome(){
 	}
 	
 	$.getJSON("http://localhost:4567/selectAll", function(nomes){
-		for ( var i = 0; i < nomes.length; i++) {
-			if (nome == nomes[i] && nome != $("span").last().html()) {
+		for (var i = 0; i < nomes.length; i++) {
+			if (nome == nomes[i]) {
 				message(element, "par já existe");
 				valida = false;
 				return false;

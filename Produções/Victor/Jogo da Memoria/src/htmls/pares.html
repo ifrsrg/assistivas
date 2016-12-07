@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta http-equiv="cache-control" content="no-cache">
+
 <meta charset="UTF-8">
+
 
 <link href='/bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
 
 <link href='/css/style.css' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src = '/js/jquery-2.1.1.min.js'></script>
+<script type='text/javascript' src='js/cadastro_par.js'></script>
+<script type='text/javascript' src='js/errorMessage.js'></script>
 
 <title>Novo par</title>
 </head>
 <body>
 	<h1>Cadastrar novo Par</h1>
 	{{erro}}
-	<form method = 'post' action='/novoPar' enctype="multipart/form-data">
+	<form method = 'post' action='/novoPar' enctype='multipart/form-data' onsubmit='return verifica()'>
 	
 		<table>
 			<tr>
-				<td><input type='text' placeholder='Nome do item upado' name='nome'></td>
+				<td><input type='text' placeholder='Nome do item upado' name='nome' onblur='verificaNome(this)'></td>
 				<td>
 					<span>Nível de dificuldade: </span>
 					<select name = 'nivel'>
@@ -42,7 +50,7 @@
 			
 			</tr>
 			<tr>
-				<td colspan='2'><input type='submit' value = 'Salvar'></td>
+				<td colspan='2'><input type='submit' id = 'button' value = 'Salvar'></td>
 			</tr>
 		</table>
 	
