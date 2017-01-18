@@ -1,59 +1,104 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="cache-control" content="no-cache">
 
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	
+	<link href='/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	
+	<link href='/css/style.css' rel='stylesheet' type='text/css'/>
+	
+	<script type="text/javascript" src = '/js/jquery-2.1.1.min.js'></script>
+	
+	<script type="text/javascript" src = '/js/editar.js'></script>
+	
+	<script type="text/javascript" src = '/js/errorMessage.js'></script>
+	
+	<script type="text/javascript" src = '/js/validation.js'></script>
 
-<!--<link href='/bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>-->
-
-<link href='/css/style.css' rel='stylesheet' type='text/css'>
-
-<script type="text/javascript" src = '/js/jquery-2.1.1.min.js'></script>
-
-<script type="text/javascript" src = '/js/editar.js'></script>
-
-<script type="text/javascript" src = '/js/errorMessage.js'></script>
-
-<title>Editar</title>
+	<title>Editar</title>
+	
 </head>
+
 <body>
-	
-	<h1>Editar</h1>
-	
-	<form method = 'post' action='/editarPar/{{data}}' enctype="multipart/form-data" onsubmit='return verifica()'>
-	
-		<table>
-			<tr>
-				<td><input type='text' placeholder='Nome do item upado' name='nome' value={{nome}} onblur='verificaNome(this)' required></td>
-				<td>
-					<span>Nível de dificuldade: </span>
-					<select name = 'nivel' value={{nivel}}>
-						<option value='1'>1</option>
-						<option value='2'>2</option>
-						<option value='3'>3</option>
-					</select>
-				</td>
-			</tr>
+
+	<div class='container-fluid'>
+		<h1 class='text-center'>Editar</h1>
+		
+		<form method = 'post' action='/editarPar/{{data}}' enctype='multipart/form-data' onsubmit='return verifica()'>
+		
+			<div class='row'>
+				
+				<div class='col-sm-offset-3 col-sm-6 bloco'>
+				
+					<div class='form-group row'>
+				<div class='col-sm-12'>
+					<label for='nome' class='control-label'>Palavra</label>
+					<input id='nome' value ={{nome}} class='form-control' type='text' name='nome' onblur='verificaNome(this)'>
+				</div>
+			</div>
 			
-			<tr>
-				<td><img width='320' height='240' src='/image/{{id}}_{{nome}}_{{data}}.{{form_img}}'></td>
-				<td><video width='320' height='240' src='/video/{{id}}_{{nome}}_{{data}}.ogg' controls></td>
-			</tr>
-			<tr>
-				<td>Mudar imagem:</td>
-				<td>Mudar video:</td>
-			</tr>
-			<tr>
-				<td><input type = 'file' name='foto' value='Mudar imagem'></td>
-				<td><input type = 'file' name='video' value='Mudar video'></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input type='submit' id = 'button' value='Concluir edição'></td>
-			</tr>
-		</table>
-	</form>
+			<div class='form-group row'>
+				<div class='col-sm-12'>
+					<label class='control-label'>Nível de dificuldade</label>
+					
+					<div class='row'>
+						<div class='col-sm-12' id='inputs' data_nivel={{nivel}}>
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="1"> 1
+							</label>
+							
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="2"> 2
+							</label>
+							
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="3"> 3
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class='row'>
+				<div class='col-sm-12'>
+					<img class='col-sm-6 media-object' src = '/image/{{id}}_{{nome}}_{{data}}.{{form_img}}'>
+				
+					<video class='col-sm-6 media-object' src='/video/{{id}}_{{nome}}_{{data}}.ogg?v=1' controls muted></video>
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12 no-margin no-padding'>
+					<div class='col-sm-6'>
+						<label for='foto' class='control-label'>Imagem</label>
+						<input id='foto' type='file' name='foto'>
+					</div>
+					
+					<div class='col-sm-6'>
+						<label for='video' class='control-label'>Video</label>
+						<input id='video'  type='file' name='video'>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12 ajuste'>
+					<input type='submit' id = 'button' value = 'Salvar' class='form-control btn btn-default'>
+				</div>
+			</div>
+				
+				</div>
+				
+			</div>
+		
+			
+		</form>
 	
 	<span style='display:none;'>{{nome}}</span>
+	
+	</div>
 </body>
 </html>

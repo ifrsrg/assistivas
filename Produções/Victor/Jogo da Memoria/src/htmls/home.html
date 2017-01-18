@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="cache-control" content="no-cache">
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href='bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
+<link href='/bootstrap/css/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
 
-<link href='css/style.css' rel='stylesheet' type='text/css'>
+<link href='/css/style.css' rel='stylesheet' type='text/css'>
+<link href='/css/home.css' rel='stylesheet' type='text/css'>
+
 
 <title>Home</title>
 
 </head>
 <body>
-	<div id='divao'>
-		<!--<video controls src='video/teste.avi'></video>-->
+	<div id='divao' class='container-fluid text-center'>
 		<h1>Jogo da Memória</h1>
-		<form method='post' action='/home'>
-			<table>
-				<tr>
-					<th><h2>Login</h2></th>
-				</tr>
-				<tr>
-					<td>{{erro}}</td>
-				</tr>
-				<tr>
-					<td><input type = 'text' name='login' placeholder ='Login ou email'></td>
-				</tr>
-				<tr>
-					<td><input type = 'password' name='senha' placeholder = 'Senha'></td>
-				</tr>
-				<tr>
-					<td><input type = 'submit' value = 'Logar'></td>
-				</tr>
-				<tr>
-					<td><a href = '/cadastro'>Criar conta</a></td>
-				</tr>
-				<tr>
-					<td><a href = '/jogar'>Jogar</a></td>
-				</tr>
-			</table>
+		<form method='post' action='/home' class='horizontal-form row'>
+			<div class='col-sm-offset-4 col-sm-4 bloco'>
+			
+				<div class='form-group row'>
+					<label class='control-label col-sm-3' for='login'>Login:</label>
+					<div class='col-sm-9'>
+						<input type = 'text' name='login' placeholder ='Login ou email' class='form-control'>
+					</div>
+				</div>
+				
+				<div class='form-group row'>
+					<label class='control-label col-sm-3' for='senha'>Senha:</label>
+					<div class='col-sm-9'>
+						<input type = 'password' name='senha' placeholder = 'Senha' class='form-control'>
+					</div>
+				</div>
+				
+				<div class='form-group row'>
+					<div class='col-sm-12'>
+						<input type = 'submit' value = 'Logar' class='btn btn-default form-control'>
+					</div>
+				</div>
+				
+				<div class='form-group row'>
+					<div class='col-sm-6'>
+						<a href = '/cadastro' class='btn btn-default form-control'>Criar conta</a>
+					</div>
+					<div class='col-sm-6'>
+						<a href = '/jogar' class='btn btn-default form-control'>Jogar</a>
+					</div>
+				</div>
+			
+			</div>
+			
 		</form>
 	</div>
 </body>

@@ -1,6 +1,6 @@
 package web;
 
-import java.net.URLEncoder;
+import Filters.Filters;
 import Service.WebServicePares;
 import Service.WebServiceUsers;
 import controladores.Cadastro_Controlador;
@@ -10,11 +10,6 @@ import controladores.Jogo_Controlador;
 import controladores.Menu_controlador;
 import controladores.Pares_Controlador;
 import controladores.UploadsListaControlador;
-import dao.ParDAO;
-import modelos.Par;
-import spark.Filter;
-import spark.Request;
-import spark.Response;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -29,37 +24,14 @@ public class Main {
 		WebServicePares wsp = new WebServicePares();
 		WebServiceUsers wsu = new WebServiceUsers();
 		
-		Filter logado = new Filter(){
+		Filters filters = new Filters();
 		
-			@Override
-			public void handle(Request req, Response resp) throws Exception {
-				if (req.session().attribute("user") == null) {
-					String erro = URLEncoder.encode("Você deve estar logado", "UTF-8");
-					resp.redirect("/home?erro=" + erro);
-				}
-			}
-		};
-		
-		Filter dono_par = new Filter(){
-
-			@Override
-			public void handle(Request req, Response resp) throws Exception {
-				ParDAO dao = new ParDAO();
-				
-				Par par = dao.selectByData(req.params("data"));
-				
-				if (par.getId() != req.session().attribute("user")) {
-					resp.redirect("/menu");
-				}
-			}		
-		};
-		
-		Spark.before("/menu", logado);
-		Spark.before("/meusUploads", logado);
-		Spark.before("/novoPar", logado);
-		Spark.before("/offsets/:offset", logado);
-		Spark.before("/editarPar/:data", logado);
-		Spark.before("/editarPar/:data", dono_par);
+		Spark.before("/menu", filters.logado);
+		Spark.before("/meusUploads", filters.logado);
+		Spark.before("/novoPar", filters.logado);
+		Spark.before("/offsets/:offset", filters.logado);
+		Spark.before("/editarPar/:data", filters.logado);
+		Spark.before("/editarPar/:data", filters.dono_par);
 		
 		Home_controlador home = new Home_controlador();
 		

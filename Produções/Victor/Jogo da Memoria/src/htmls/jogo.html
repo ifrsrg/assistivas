@@ -1,80 +1,139 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Jogo da Memória</title>
 
-<meta http-equiv="cache-control" content="no-cache">
-<script type="text/javascript" src = 'js/jquery-2.1.1.min.js'></script>
-<script type="text/javascript" src = 'js/jogo_script.js'></script>
-<link rel='stylesheet' href='css/style.css'>
+<head>
+
+	<meta charset="UTF-8">
+	<title>Jogo da Memória</title>
+	<link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='/css/style.css'>
+	
+	<script type="text/javascript" src = 'js/jquery-2.1.1.min.js'></script>
+	<script type="text/javascript" src = '/bootstrap/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src = 'js/jogo_script.js'></script>
 
 </head>
+
 <body>
-	<h1>Jogo da Memória</h1>
-	<div id = 'change'>
-		<table>
-			<tr>
-				<th colspan='4'>Escolha o nível das palavras</th>
-			</tr>
-			<tr>
-				<td>
-					<input type='radio' id='1A' name='niveis' value='1'>
-					<label for='1A'>Nível 1</label>
-				</td>
-				<td>
-					<input type='radio' id='1B' name='niveis' value='2'>
-					<label for='1B'>Nível 2</label>
-				</td>
-				<td>
-					<input type='radio' id='1C' name='niveis' value='3'>
-					<label for='1C'>Nível 3</label>
-				</td>
-				<td>
-					<input type='radio' id='1D' name='niveis' value='0'>
-					<label for='1D'>Mesclado</label>
-				</td>
-			</tr>
-			<tr>
-				<th colspan='4'>Escolha o número de pares</th>
-			</tr>
-			<tr>
-				<td>
-					<input type='radio' id='2A' name='tamanhos' value='6'>
-					<label for = '2A'>6 pares</label>
-				</td>
-				<td>
-					<input type='radio' id='2B' name='tamanhos' value='10'>
-					<label for = '2B'>10 pares</label>
-				</td>
-				<td>
-					<input type='radio' id='2C' name='tamanhos' value='12'>
-					<label for = '2C'>12 pares</label>
-				</td>
-				<td>
-					<input type='radio' id='2D' name='tamanhos' value='14'>
-					<label for = '2D'>14 pares</label>
-				</td>
-			</tr>
-			<tr>
-				<th colspan='4'>Você deseja...</th>
-			</tr>
-			<tr>
-				<td colspan='2'>
-					<input type = 'radio' id='3A' name='tipo_pares' value='0'>
-					<label for='3A'>Jogar com meus pares</label>
-				</td>
-				<td colspan='2'>
-					<input type = 'radio' id='3B' name='tipo_pares' value='1'>
-					<label for='3B'>Jogar com pares de outros jogadores</label>
-				</td>
-			</tr>
-			<tr>
-				<th colspan = '4'>
-					<button id='jogar'>Jogar</button>
-				</th>
-			</tr>
-		</table>
+
+		
+	<div class="modal fade mymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id='modal'>
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class='modal-header text-center'>
+	      	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      	<h2 id='palavra'></h2>
+	      </div>
+	      <div class="modal-body">
+	      <div class='row'>
+			<div class='col-sm-12'>
+				<img id='imagem' class='col-sm-6 media-object media_modal' src = ''>
+			
+				<video id='video' class='col-sm-6 media-object media_modal' src='' controls muted></video>
+			</div>
+		  </div>
+		  <br>
+		  <div class='row' id='alfabeto'>
+		  </div>
+		  
+	      </div>
+	    </div>
+	  </div>
 	</div>
+		
+	<div class='container-fluid'>
+		
+		<h1 class='text-center'>Jogo da Memória</h1>
+		
+		<div class='row'>
+			<div class='col-sm-offset-4 col-sm-4 bloco' id='bloco'>
+			
+			
+				<div class='form-group row'>
+					<div class='col-sm-12'>
+						<label class='control-label'>Nível de dificuldade</label>
+						
+						<div class='row'>
+							<div class='col-sm-12'>
+								<label class="radio-inline">
+									<input type="radio" name='niveis' value="1"> Nível 1
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='niveis' value="2"> Nível 2
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='niveis' value="3"> Nível 3
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='niveis' value="0"> Mesclado
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- -------------------------- -->
+				
+				<div class='form-group row'>
+					<div class='col-sm-12'>
+						<label class='control-label'>Número de pares</label>
+						
+						<div class='row'>
+							<div class='col-sm-12'>
+								<label class="radio-inline">
+									<input type="radio" name='tamanhos' value="6"> 6 pares
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='tamanhos' value="10"> 10 pares
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='tamanhos' value="12"> 12 pares
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" name='tamanhos' value="14"> 14 pares
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- ----------------------------------- -->
+				
+				<div class='form-group row'>
+					<div class='col-sm-12'>
+						<label class='control-label'>Você deseja jogar com...</label>
+						
+						<div class='row'>
+							<div class='col-sm-12'>
+								<label class="radio-inline">
+									<input type="radio" id = '3A' name='tipo_pares' value="0"> Meus pares
+								</label>
+								
+								<label class="radio-inline">
+									<input type="radio" id = '3B' name='tipo_pares' value="1"> Pares de outros jogadores
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class='form-group row'>
+					<div class='col-sm-offset-2 col-sm-8'>
+						<input type='button' id = 'jogar' value = 'Jogar' class='form-control btn btn-default'>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
 </body>
 </html>

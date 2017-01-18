@@ -47,7 +47,7 @@ public class EditarPar_Controlador {
 			String nome = req.queryMap("nome").value();
 			Integer nivel = Integer.parseInt(req.queryMap("nivel").value());
 			String data = req.params("data");
-						
+									
 			Par par = new Par();
 			par.setId(req.session().attribute("user"));
 			par.setNome(nome);

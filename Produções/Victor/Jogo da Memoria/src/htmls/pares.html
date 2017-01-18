@@ -2,58 +2,127 @@
 <html>
 <head>
 
-<meta http-equiv="cache-control" content="no-cache">
-
 <meta charset="UTF-8">
 
 
-<link href='/bootstrap/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
+<link href='/bootstrap/css/bootstrap.min.css' rel='stylesheet' type = 'text/css'>
 
 <link href='/css/style.css' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript" src = '/js/jquery-2.1.1.min.js'></script>
-<script type='text/javascript' src='js/cadastro_par.js'></script>
-<script type='text/javascript' src='js/errorMessage.js'></script>
+<script type="text/javascript" src = '/js/cadastro_par.js'></script>
+<script type="text/javascript" src = '/js/errorMessage.js'></script>
+<script type="text/javascript" src = '/js/validation.js'></script>
 
 <title>Novo par</title>
 </head>
 <body>
-	<h1>Cadastrar novo Par</h1>
-	{{erro}}
-	<form method = 'post' action='/novoPar' enctype='multipart/form-data' onsubmit='return verifica()'>
-	
-		<table>
-			<tr>
-				<td><input type='text' placeholder='Nome do item upado' name='nome' onblur='verificaNome(this)'></td>
-				<td>
-					<span>Nível de dificuldade: </span>
-					<select name = 'nivel'>
-						<option value='1'>1</option>
-						<option value='2'>2</option>
-						<option value='3'>3</option>
-					</select>
-				</td>
-			</tr>
+
+	<div class='container-fluid'>
+		<h1 class='text-center'>Cadastrar novo Par</h1>
+		
+		<form method = 'post' action='/novoPar' enctype='multipart/form-data' onsubmit='return verifica()' class='row'>
 			
-			<tr>
-				<td colspan='2'>Selecione um video</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input type = 'file' name='video'></td>
+			<div class='col-sm-offset-3 col-sm-6 bloco'>
+			
+				<div class='row'>
+				<span class='nome col-sm-12'>{{erro}}</span>
+			</div>
+		
+			<div class='form-group row'>
+				<div class='col-sm-12 ajuste'>
+					<label for='nome' class='control-label'>Palavra</label>
+					<input id='nome' class='form-control' type='text' name='nome' onblur='verificaNome(this)'>
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12'>
+					<label class='control-label'>Nível de dificuldade</label>
+					
+					<div class='row'>
+						<div class='col-sm-12'>
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="1"> 1
+							</label>
+							
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="2"> 2
+							</label>
+							
+							<label class="radio-inline">
+								<input type="radio" name='nivel' value="3"> 3
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12'>
+					<label for='video' class='control-label'>Video</label>
+					<input id='video'  type='file' name='video'>
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12'>
+					<label for='foto' class='control-label'>Imagem</label>
+					<input id='foto' type='file' name='foto'>
+				</div>
+			</div>
+			
+			<div class='form-group row'>
+				<div class='col-sm-12 ajuste'>
+					<input type='submit' id = 'button' value = 'Salvar' class='form-control btn btn-default'>
+				</div>
+			</div>
+			</div>
+		
+		</form>
+		
+			
+	</div>
+	
+	
+	<!--
+		<h1>Cadastrar novo Par</h1>
+		{{erro}}
+		<form method = 'post' action='/novoPar' enctype='multipart/form-data' onsubmit='return verifica()'>
+		
+			<table>
+				<tr>
+					<td><input type='text' placeholder='Nome do item upado' name='nome' onblur='verificaNome(this)'></td>
+					<td>
+						<span>Nível de dificuldade: </span>
+						<select name = 'nivel'>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+						</select>
+					</td>
+				</tr>
 				
-			</tr>
-			<tr>
-				<td colspan='2'>Selecione uma imagem</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input type = 'file' name='foto'></td>
-			
-			</tr>
-			<tr>
-				<td colspan='2'><input type='submit' id = 'button' value = 'Salvar'></td>
-			</tr>
-		</table>
+				<tr>
+					<td colspan='2'>Selecione um video</td>
+				</tr>
+				<tr>
+					<td colspan='2'><input type = 'file' name='video'></td>
+					
+				</tr>
+				<tr>
+					<td colspan='2'>Selecione uma imagem</td>
+				</tr>
+				<tr>
+					<td colspan='2'><input type = 'file' name='foto'></td>
+				
+				</tr>
+				<tr>
+					<td colspan='2'><input type='submit' id = 'button' value = 'Salvar'></td>
+				</tr>
+			</table>
+		</form>
 	
-	</form>
+	-->
 </body>
 </html>

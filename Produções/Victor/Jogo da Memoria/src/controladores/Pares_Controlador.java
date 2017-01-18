@@ -65,7 +65,7 @@ public class Pares_Controlador {
 
 		@Override
 		public ModelAndView handle(Request req, Response resp) {
-			String erro = req.queryParams("erro");
+			String erro = req.params("erro");
 			if (erro != null) {
 				HashMap dados = new HashMap();
 				dados.put("erro", erro);

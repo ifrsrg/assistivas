@@ -52,10 +52,11 @@ public class FileManager {
 				f.renameTo(new File(dir, array[0] + "_" + array[1] + "_" + array[2]));
 			}
 		}
-		
+				
 		if (file.getContentType().equals("application/octet-stream")){
 			return false;
 		}
+		
 		delete(timestamp, tipo);
 		return save(file, tipo, id, nome, timestamp);
 	}
