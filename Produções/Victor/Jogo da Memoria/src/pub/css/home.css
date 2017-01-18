@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.container-fluid{
+	padding-top: 25px;
+}
+
+.horizontal-form{
+	padding: 3px;
+}
+
+#conteudo{
+	background-color: #FFB600;
+}

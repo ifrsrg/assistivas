@@ -8,7 +8,9 @@ $(document).ready(function(){
 	checar();
 	
     $(document).on("click", "#jogar", function(){
-        carregarJogo();
+    	if (getTamanho() != undefined && getNivel() != undefined && getTipoPares() != undefined){
+	        carregarJogo();
+    	}
     });
 
     $(document).on("click", ".posicoes", function(){
@@ -28,7 +30,15 @@ $(document).ready(function(){
     $(document).on("click", "#3A", function(){
     	checar();
     });
-
+    
+    $(document).on("click", ".info", function(){
+    	info(this);
+    });
+    
+    $(document).on("click", "#banner > .info", function(){
+    	$("#banner").slideToggle("slow");
+    });
+    
 });
 
 function carregarJogo(){
@@ -42,7 +52,14 @@ function montar(tamanho){ //monta o HTML através do innerHTML
     var nivel = getNivel();
     var tamanho = getTamanho();
     var linhas, colunas,change = "";
-    var elemento = document.getElementsByTagName("table")[0];
+  //document.getElementById("bloco").innerHTML = "<table></table>";
+    var elemento = document.getElementById("bloco");
+    
+    $("#bloco").removeClass("col-sm-offset-4");
+    $("#bloco").addClass("col-sm-offset-1");
+    $("#bloco").removeClass("col-sm-4");
+    $("#bloco").addClass("col-sm-10");
+    $("#bloco").css("padding-bottom", "15px");
 
     elemento.id = "jogo";
 
@@ -62,7 +79,39 @@ function montar(tamanho){ //monta o HTML através do innerHTML
 
     var num_pos = 0;
 
-    for(var i = 0; i < linhas; i++){
+    var total = colunas * linhas;
+    
+    for (var i = 0; i < total; i++) {
+		change += "<div class='posicoes' virado=false></div>";
+	}
+    
+    elemento.innerHTML = change;
+    
+    var posicoes = document.getElementsByClassName("posicoes");
+    
+    var vezes = 0;
+    while(count < tamanho){
+        var random_num = parseInt(Math.random()*(tamanho*2));
+        var pos = posicoes[random_num];
+        if (pos.innerHTML === "") {
+            pos.setAttribute("data-id", count);
+            if (vezes ==  0){
+                pos.setAttribute("data-ext", 0);
+            	pos.innerHTML = "<img class='carta' src='covers/image_cover.jpg'>";
+            }else{
+                pos.setAttribute("data-ext", 1);
+            	pos.innerHTML = "<img class='carta' src='covers/video_cover.png'>";
+            }
+            tabuleiro[random_num] = pares[count];
+            vezes++;
+        }
+        if (vezes == 2) {
+            vezes = 0;
+            count++;
+        }
+    }
+    
+    /*for(var i = 0; i < linhas; i++){
         change += "<tr>";
         for(var j = 0; j < colunas; j++){
             change += "<td class='posicoes' virado=false></td>";
@@ -92,7 +141,7 @@ function montar(tamanho){ //monta o HTML através do innerHTML
             vezes = 0;
             count++;
         }
-    }
+    }*/
 }
 
 function carregaPares(vetor){
@@ -105,7 +154,7 @@ function carregaPares(vetor){
 }
 
 function forma_nome(par, ext){
-    return par.id + "_" + rename(par.nome) + "_" + par.data + "." + ext;
+    return par.id + "_" + rename(par.nome) + "_" + par.data + "." + ext + "?v="+new Date().getTime();
 }
 
 function rename(nome){
@@ -115,7 +164,8 @@ function rename(nome){
 
 function joga(element){
     var numero = $(element).attr("data-id");
-    if ($(element).attr("virado") == 'false' && ($(element).attr("data-ext") != $(selecionadas[0]).attr("data-ext") || selecionadas.length == 0)){
+    if ($(element).attr("virado") == 'false' && 
+    	($(element).attr("data-ext") != $(selecionadas[0]).attr("data-ext") || selecionadas.length == 0)){
         var item = element.children[0];
         var ext = element.getAttribute("data-ext");
         if (ext == 0) {
@@ -126,13 +176,17 @@ function joga(element){
         $(element).attr("virado", true);
         selecionadas[selecionadas.length] = element;
         if (selecionadas.length === 2){
-            if (selecionadas[0] !== selecionadas[1]){
+            if ($(selecionadas[0]).attr("data-id") !== $(selecionadas[1]).attr("data-id")){
             	$("#jogo").css("background-color", "red");
             	achou = setTimeout(function(){limpa(false);}, 3000);
             }else{
                 viradas++;
                 $("#jogo").css("background-color", "green");
             	achou = setTimeout(function(){limpa(true);}, 3000);
+            	for (var i = 0; i < 2; i++) {
+                	selecionadas[i].innerHTML += "<button type='button' class='info' data-toggle='modal' data-target='.mymodal'" +
+                			"					  data-id="+$(selecionadas[i]).attr("data-id")+"></div>";
+            	}
                 if (viradas === pares.length)
                     venceu();
                 selecionadas = [];
@@ -141,6 +195,33 @@ function joga(element){
     }
 }
 
+function info(element){
+	var par = pares[$(element).parent().attr("data-id")];
+	var nome = normaliza_nome(par.nome);
+	var array = nome.split('');
+
+	$("#palavra").html(nome);
+	$("#imagem").attr("src", "image/" + forma_nome(par, par.form_img));
+	$("#video").attr("src", "video/" + forma_nome(par, "ogg"));
+	
+	var alfabeto = $("#alfabeto");
+	
+	alfabeto.empty();
+	
+	for(var i = 0; i < nome.length; i++){
+		alfabeto.append("<img class='media-object alfabeto' src='/alfabeto/" + nome[i] + ".png'>")
+	}
+}
+
+function normaliza_nome(nome){
+    nome.replace(new RegExp('á', 'g'), 'a');
+    nome.replace(new RegExp('é', 'g'), 'e');
+    nome.replace(new RegExp('â', 'g'), 'a');
+    nome.replace(new RegExp('ê', 'g'), 'e');
+    nome.replace(new RegExp('ã', 'g'), 'a');
+    nome.replace(new RegExp('ú', 'g'), 'u');
+    return nome;
+}
 
 function limpa(estado){
 	$("#jogo").css("background-color", "#FFB600");

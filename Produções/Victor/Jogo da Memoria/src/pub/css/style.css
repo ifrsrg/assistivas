@@ -1,6 +1,6 @@
 table{
-	background-color: #FFB600;
-	border-radius: 10px;
+ 	width:100%;
+ 	height:auto;	
 }
 
 td, tr{
@@ -21,8 +21,8 @@ a{
 }
 
 .carta{
-	width: 170px;
-	height: 220px;
+	width: 150px;
+	height: 200px;
 }
 
 #aviso{
@@ -31,4 +31,68 @@ a{
 
 .erro{
 	display: none;
+}
+
+.posicoes{
+	margin-left: 15px;
+	margin-top: 15px;
+	float: left;
+	position: relative;
+}
+
+.info{
+	position: absolute;
+	width:30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: red;
+	top: 10%;
+	right: 10%;
+}
+
+#banner{
+	position: relative;
+	margin-top: 5%;
+	display: none;
+	background-color: #FFB600;
+	border-radius: 10px;
+	
+}
+
+#bloquinho{
+	background-color: red;
+}
+
+.nivel{
+	font-size: 20px;
+	float: right;
+}
+
+.nome{
+	font-size: 20px;
+	float: left;
+}
+
+.bloco{
+	background-color: #FFB600;
+	padding-top: 15px;
+	border-radius: 10px;
+}
+
+.glyphicon{
+	margin-right: 10px;
+}
+
+#botao{
+	padding-left: 0;
+	padding-right: 0;
+	margin-top: 5px; 
+}
+
+.alfabeto{
+	display: inline;
+}
+
+.media_modal{
+	max-height: 300px;
 }

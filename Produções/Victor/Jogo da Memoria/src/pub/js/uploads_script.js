@@ -15,20 +15,23 @@ $(function(){
 function lista(vetor){
 	
 	if (vetor.length == 0) {
-		$("body").append("<h4>Você não possui pares</h4>");
+		$("body").append("<h4 class='text-center'>Você não possui pares</h4>");
 	}
 	
-	var table = document.getElementsByTagName("table")[0];
+	var table = document.getElementById("conteudo");
 		
 	for (var i = 0; i < 5 && vetor[i] != undefined; i++) {
-		table.innerHTML += "<tr><td colspan='2' class='item'>"+vetor[i].nome+" Nível: "+vetor[i].nivel+"</td></tr><tr><td><img width='320' height='240' src=/image/" +
-						   toNameFile(vetor[i], vetor[i].form_img) + "></td>" +"<td><video width='320' height='240' src = 'video/"+toNameFile(vetor[i], "ogg") +"' controls>"+
-						   "</video></td></tr><tr><td><button class='remover' id_data = "+ vetor[i].data +" >Remover</button></td>" + 
-				     	   "<td><a href = '/editarPar/" + vetor[i].data + "'><button>Editar</button></a></td></tr>";
+		table.innerHTML += "<div class='row item'><div class='col-sm-12'><div class='row'><div class='col-sm-9'>" + 
+						   "<span class='nome'>" + vetor[i].nome + "</span></div><div class='col-sm-3'><span class='nivel'>Nível: " + vetor[i].nivel + "</span></div></div><div class='row'>" +
+						   "<img class='col-sm-6 media-object' src='/image/" + toNameFile(vetor[i], vetor[i].form_img) + "'>" +
+						   "<video class='col-sm-6 media-object' src='/video/"+toNameFile(vetor[i], 'ogg') + "' controls muted></video>" +
+						   "</div><br><div class='form-group row'><div class='col-sm-6'><button id_data = "+ vetor[i].data +
+						   " class='btn btn-default form-control remover'>Remover</button></div><div class='col-sm-6'>" +
+						   "<a href = '/editarPar/" + vetor[i].data + "' class='btn btn-default form-control '>Editar</a></div></div></div></div>";
 	}
 	var botao = document.getElementById("botao");
 	if (vetor[5] != undefined && botao.innerHTML == "") {
-		botao.innerHTML = "<button id='botao'>Carregar Mais</button>";
+		botao.innerHTML = "<button id='botao' class='form-control'>Carregar Mais</button>";
 	} else{
 		botao.innerHTML = "";
 	}
@@ -44,7 +47,7 @@ function rowNum(){
 }
 
 function toNameFile(item, formato){
-	return item.id + "_" + rename(item.nome) + "_" + item.data + "." + formato;
+	return item.id + "_" + rename(item.nome) + "_" + item.data + "." + formato +"?v="+ new Date().getTime();
 }
 
 function rename(nome){

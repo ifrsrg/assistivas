@@ -1,13 +1,17 @@
 function message(element, message){
-	var erro = $(element).parent().parent();
-	if (!erro.prev().hasClass("erro")) {
-		$("<tr class='erro'><td>" + message + "</td></tr>").insertBefore(erro);
-		$(".erro").show(500);
+	
+	var erro = $(element).next();
+	
+	if (erro.hasClass("erro")) {
+		erro.html(message);
+	}else{
+		$('<span class="help-block erro text-left">'+message+'</span>').insertAfter($(element));
+		$(element).next().show('slow');
 	}
 }
 
 function retiraMessage(element){
-	var erro = $(element).parent().parent().prev();
+	var erro = $(element).next();
 	if (erro.hasClass("erro")) {
 		erro.hide(500, function(){
 			erro.remove();
