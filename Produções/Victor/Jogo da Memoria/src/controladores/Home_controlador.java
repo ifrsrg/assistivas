@@ -1,5 +1,6 @@
 package controladores;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import spark.ModelAndView;
@@ -39,7 +40,8 @@ public class Home_controlador{
 			int verificacao = dao.verificaUsuario(login, senha);
 			
 			if (verificacao < 0) {
-				resp.redirect("/home");
+				String erro = URLEncoder.encode("login ou senha incorretos", "UTF-8");
+				resp.redirect("/home?erro=" + erro);
 			}else{
 				req.session().attribute("user", verificacao);
 				

@@ -38,11 +38,20 @@ function verificaNome(){
 		
 }
 
+function verificaNivel(){
+	if ($("#radios input[type='radio']:checked").val() == undefined) {
+		return false;
+	}else{
+		return true;
+	}
+}
+
 function verifica(){
 	verificaNome();
-	if (valida) {
+	if (valida && verificaNivel()) {
 		document.getElementById("button").disabled = true;
+		return true;
 	}
 	
-	return valida;
+	return false;
 }

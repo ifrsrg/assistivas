@@ -15,7 +15,7 @@ $(function(){
 function lista(vetor){
 	
 	if (vetor.length == 0) {
-		$("body").append("<h4 class='text-center'>Você não possui pares</h4>");
+		$("#conteudo").append("<h4 class='text-center'>Você não possui pares</h4>");
 	}
 	
 	var table = document.getElementById("conteudo");

@@ -1,4 +1,4 @@
-var valida_login = true;
+var valida_login;
 
 function verificaNome(element){
 	var nome = element.value;
@@ -46,12 +46,15 @@ function verificaLogin(element){
 		}
 	}
 	
-	$.getJSON("/users/"+login, function(item){
+	$.ajax({
+		url: ("/users/"+login),
+		async: false,
+		dataType: "json"
+	}).done(function(item){
 		if (item == login) {
 			error(element);
 			message(element, "login existe");
 			valida_login = false;
-			
 		}
 		
 		if (valida_login == false) {
@@ -61,23 +64,11 @@ function verificaLogin(element){
 		retiraMessage(element);
 		
 		approve(element);
+		valida_login = true;
 		return true;
-
 	});
 	
 	
-}
-
-function Ajax(login){
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	    	var response = JSON.parse(xhttp.responseText);
-	    	Valida(response, login);
-	    }
-	  };
-	  xhttp.open("GET", "/users/"+login, true);
-	  xhttp.send();
 }
 
 function Valida(ajax, login){

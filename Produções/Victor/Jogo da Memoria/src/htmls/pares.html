@@ -13,10 +13,11 @@
 <script type="text/javascript" src = '/js/cadastro_par.js'></script>
 <script type="text/javascript" src = '/js/errorMessage.js'></script>
 <script type="text/javascript" src = '/js/validation.js'></script>
+<script type="text/javascript" src = '/js/aviso.js'></script>
 
 <title>Novo par</title>
 </head>
-<body>
+<body onload='verificaAviso()'>
 
 	<div class='container-fluid'>
 		<h1 class='text-center'>Cadastrar novo Par</h1>
@@ -25,9 +26,10 @@
 			
 			<div class='col-sm-offset-3 col-sm-6 bloco'>
 			
-				<div class='row'>
-				<span class='nome col-sm-12'>{{erro}}</span>
-			</div>
+				<div class='text-center'>
+					<label class='control-label'>{{erro}}</label>
+				</div>
+				
 		
 			<div class='form-group row'>
 				<div class='col-sm-12 ajuste'>
@@ -41,7 +43,7 @@
 					<label class='control-label'>Nível de dificuldade</label>
 					
 					<div class='row'>
-						<div class='col-sm-12'>
+						<div class='col-sm-12' id='radios'>
 							<label class="radio-inline">
 								<input type="radio" name='nivel' value="1"> 1
 							</label>
@@ -80,49 +82,8 @@
 			</div>
 		
 		</form>
-		
 			
 	</div>
 	
-	
-	<!--
-		<h1>Cadastrar novo Par</h1>
-		{{erro}}
-		<form method = 'post' action='/novoPar' enctype='multipart/form-data' onsubmit='return verifica()'>
-		
-			<table>
-				<tr>
-					<td><input type='text' placeholder='Nome do item upado' name='nome' onblur='verificaNome(this)'></td>
-					<td>
-						<span>Nível de dificuldade: </span>
-						<select name = 'nivel'>
-							<option value='1'>1</option>
-							<option value='2'>2</option>
-							<option value='3'>3</option>
-						</select>
-					</td>
-				</tr>
-				
-				<tr>
-					<td colspan='2'>Selecione um video</td>
-				</tr>
-				<tr>
-					<td colspan='2'><input type = 'file' name='video'></td>
-					
-				</tr>
-				<tr>
-					<td colspan='2'>Selecione uma imagem</td>
-				</tr>
-				<tr>
-					<td colspan='2'><input type = 'file' name='foto'></td>
-				
-				</tr>
-				<tr>
-					<td colspan='2'><input type='submit' id = 'button' value = 'Salvar'></td>
-				</tr>
-			</table>
-		</form>
-	
-	-->
 </body>
 </html>

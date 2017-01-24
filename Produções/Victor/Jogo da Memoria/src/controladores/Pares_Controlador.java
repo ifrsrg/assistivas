@@ -9,6 +9,7 @@ import javax.servlet.http.Part;
 import dao.ParDAO;
 import modelos.Par;
 import spark.ModelAndView;
+import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -65,10 +66,9 @@ public class Pares_Controlador {
 
 		@Override
 		public ModelAndView handle(Request req, Response resp) {
-			String erro = req.params("erro");
-			if (erro != null) {
+			if (req.queryMap("erro") != null) {
 				HashMap dados = new HashMap();
-				dados.put("erro", erro);
+				dados.put("erro", req.queryParams("erro"));
 				return new ModelAndView(dados, "pares.html");
 			}
 			return new ModelAndView(null, "pares.html");
