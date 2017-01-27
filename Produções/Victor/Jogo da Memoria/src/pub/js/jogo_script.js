@@ -3,9 +3,17 @@ var pares = [];
 var selecionadas = [];
 var viradas = 0;
 
+var nivel, tamanho, tipo_pares;
+
+var menu = "";
+
 $(document).ready(function(){
 	
 	checar();
+	
+	menu = document.getElementsByClassName("container-fluid")[0].innerHTML;
+	
+	alert(menu);
 	
     $(document).on("click", "#jogar", function(){
     	if (getTamanho() != undefined && getNivel() != undefined && getTipoPares() != undefined){
@@ -39,29 +47,49 @@ $(document).ready(function(){
     	$("#banner").slideToggle("slow");
     });
     
+    $(document).on("click", ".pos-jogo", function(){
+    	$("h1:first").html("Jogo da Memória");
+    	$("#opcoes").remove();
+    });
+    
+    $(document).on("click", "#btn-1", function(){
+    	toMenu();
+    });
+    
+    $(document).on("click", "#btn-2", function(){
+    	montar();
+    });
+    
+    $(document).on("click", "#btn-3", function(){
+    	Ajax(nivel, tamanho, tipo_pares);
+    });
+    
+    $(document).on("click", "#btn-4", function(){
+    	jogar_novamente();
+    });
+    
 });
 
 function carregarJogo(){
-    var nivel = getNivel();
-    var tamanho = getTamanho();
-    var tipo_pares = getTipoPares();
+	nivel = getNivel();
+    tamanho = getTamanho();
+    tipo_pares = getTipoPares();
     Ajax(nivel, tamanho, tipo_pares);
 }
 
-function montar(tamanho){ //monta o HTML através do innerHTML
-    var nivel = getNivel();
-    var tamanho = getTamanho();
-    var linhas, colunas,change = "";
-  //document.getElementById("bloco").innerHTML = "<table></table>";
-    var elemento = document.getElementById("bloco");
-    
-    $("#bloco").removeClass("col-sm-offset-4");
-    $("#bloco").addClass("col-sm-offset-1");
-    $("#bloco").removeClass("col-sm-4");
-    $("#bloco").addClass("col-sm-10");
-    $("#bloco").css("padding-bottom", "15px");
 
-    elemento.id = "jogo";
+
+function montar(){ //monta o HTML através do innerHTML
+    var linhas, colunas,change = "";
+    var elemento = document.getElementById("jogo");
+    
+    $("#jogo").removeClass("col-sm-offset-4");
+    $("#jogo").addClass("col-sm-offset-1");
+    $("#jogo").removeClass("col-sm-4");
+    $("#jogo").addClass("col-sm-10");
+    $("#jogo").css("padding-bottom", "15px");
+
+    //elemento.id = "jogo";
 
 
     switch(tamanho){
@@ -110,38 +138,7 @@ function montar(tamanho){ //monta o HTML através do innerHTML
             count++;
         }
     }
-    
-    /*for(var i = 0; i < linhas; i++){
-        change += "<tr>";
-        for(var j = 0; j < colunas; j++){
-            change += "<td class='posicoes' virado=false></td>";
-        }
-    }
 
-    elemento.innerHTML = change;
-
-    var posicoes = document.getElementsByTagName("td");
-    var vezes = 0;
-    while(count < tamanho){
-        var random_num = parseInt(Math.random()*(tamanho*2));
-        var pos = posicoes[random_num];
-        if (pos.innerHTML === "") {
-            pos.setAttribute("data-id", count);
-            if (vezes ==  0){
-                pos.setAttribute("data-ext", 0);
-            	pos.innerHTML = "<img class='carta' src='covers/image_cover.jpg'>";
-            }else{
-                pos.setAttribute("data-ext", 1);
-            	pos.innerHTML = "<img class='carta' src='covers/video_cover.png'>";
-            }
-            tabuleiro[random_num] = pares[count];
-            vezes++;
-        }
-        if (vezes == 2) {
-            vezes = 0;
-            count++;
-        }
-    }*/
 }
 
 function carregaPares(vetor){
@@ -184,11 +181,13 @@ function joga(element){
                 $("#jogo").css("background-color", "green");
             	achou = setTimeout(function(){limpa(true);}, 3000);
             	for (var i = 0; i < 2; i++) {
-                	selecionadas[i].innerHTML += "<button type='button' class='info' data-toggle='modal' data-target='.mymodal'" +
+                	selecionadas[i].innerHTML += "<input type='button' class='info' data-toggle='modal' data-target='.mymodal'" +
                 			"					  data-id="+$(selecionadas[i]).attr("data-id")+"></div>";
             	}
-                if (viradas === pares.length)
+                if (viradas === pares.length){
                     venceu();
+                    viradas = 0;
+                }
                 selecionadas = [];
             }
         }
@@ -250,28 +249,29 @@ function mudaCor(achou){
 
 function jogar_novamente(){
     document.getElementsByTagName("h1")[0].innerHTML = "Jogo da Memória";
-    document.getElementById("change").innerHTML = "<table><tr><th colspan='4'>Escolha o nível das palavras</th>"+
-                                                  "</tr><tr><td><input type='radio' id='1A' name='niveis' value='1'><label for='1A'>Nível 1</label>"+
-                                                  "</td><td><input type='radio' id='1B' name='niveis' value='2'><label for='1B'>Nível 2</label>"+
-                                                  "</td><td><input type='radio' id='1C' name='niveis' value='3'><label for='1C'>Nível 3</label>"+
-                                                  "</td><td><input type='radio' id='1D' name='niveis' value='0'><label for='1D'>Mesclado</label>"+
-                                                  "</td></tr><tr><th colspan='4'>Escolha o número de pares</th></tr><tr><td><input type='radio' id='2A' name='tamanhos' value='6'>" +
-                                                  "<label for = '2A'>6 pares</label></td><td><input type='radio' id='2B' name='tamanhos' value='10'>"+
-                                                  "<label for = '2B'>10 pares</label></td><td><input type='radio' id='2C' name='tamanhos' value='12'>"+
-                                                  "<label for = '2C'>12 pares</label></td><td><input type='radio' id='2D' name='tamanhos' value='14'>"+
-                                                  "<label for = '2D'>14 pares</label></td></tr><tr><th colspan='4'>Você deseja...</th></tr><tr><td colspan='2'>"+
-                                                  "<input type = 'radio' id='3A' name='tipo_pares' value='0'><label for='3A'>Jogar com meus pares</label></td>"+
-                                                  "<td colspan='2'><input type = 'radio' id='3B' name='tipo_pares' value='1'><label for='3A'>Jogar com pares de outros jogadores</label>"+
-                                                  "</td></tr><tr><th colspan = '4'><button id='jogar'>Jogar</button></th></tr>";
+    
+    document.getElementsByClassName("container-fluid")[0].innerHTML = menu;
+    
+    alert(menu);
+    
     checar();
 }
 
 function venceu(){
     document.getElementsByTagName("h1")[0].innerHTML = "Você Venceu";
-    var body = document.getElementById("change");
-    body.innerHTML += "<button id='novo'>Jogar Novamente</button><button id='voltar'>Voltar ao menu</button>";
+    
+    var add = "<div class='text-center' id='opcoes'><input  type='button' id = 'btn-2' class='btn btn-default pos-jogo' value='Jogar com mesmos pares'>" +
+			  "<input type='button' id = 'btn-3' class='btn btn-default pos-jogo' value='Jogar com outros pares'>" +
+			  "<input type='button' id = 'btn-4' class='btn btn-default pos-jogo' value='Trocar dificuldade'>";
+    
+    if (logado()) {
+    	add += "<input type='button' id='btn-1' class='btn btn-default pos-jogo' value='Voltar ao menu'>";
+	}
+    
+    add += "</div>"
+    
+    $(".container-fluid:first").append(add);
 }
-
 
 function Ajax(nivel, tamanho, tipo_pares){
     var url = "http://localhost:4567/paresjogo/"+nivel+"/"+tamanho+"/"+tipo_pares;
@@ -304,11 +304,9 @@ function toMenu(){
 }
 
 function checar(){
-	$.getJSON("http://localhost:4567/logado", verifica);
-}
-
-function verifica(teste){
-	if (teste != true) {
+	alert($(".hidden:first").html());
+	if ($(".hidden:first").html() != 'true') {
 		$("#3B").click();
 	}
+
 }

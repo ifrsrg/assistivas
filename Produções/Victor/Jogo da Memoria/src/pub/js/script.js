@@ -11,7 +11,8 @@ function verificaNome(element){
 	
 	for (var i = 0; i < nome.length; i++) {
 		var code = nome.toLowerCase().charCodeAt(i);
-		if (!((code >= 97 && code <= 122) || (code >= 222 && code <= 256) || (code == 32))) {
+		alert(code);
+		if (!((code >= 97 && code <= 122) || (code >= 128 && code <= 136) || (code >= 160 && code <= 163) || (code == 32))) {
 			error(element);
 			message(element, "nome inválido");
 			return false;

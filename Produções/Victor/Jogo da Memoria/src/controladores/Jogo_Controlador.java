@@ -1,5 +1,7 @@
 package controladores;
 
+import java.util.HashMap;
+
 import spark.*;
 
 public class Jogo_Controlador {
@@ -11,7 +13,19 @@ public class Jogo_Controlador {
 
 		@Override
 		public ModelAndView handle(Request req, Response resp) {
-			return new ModelAndView(null, "jogo.html");
+			
+			Boolean teste;
+			
+			if (req.session().attribute("user") != null) {
+				teste = true;
+			}else{
+				teste = false;
+			}
+			
+			HashMap dados = new HashMap();
+			dados.put("logado", teste);
+			
+			return new ModelAndView(dados, "jogo.html");
 		}
 		
 	}
