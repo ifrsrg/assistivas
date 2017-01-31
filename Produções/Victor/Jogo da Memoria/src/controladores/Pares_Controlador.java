@@ -44,9 +44,18 @@ public class Pares_Controlador {
 			
 			String time = t.getTimestamp();
 			
+			/*f.save(image, "image", id, nome, time) &&
+			f.save(video, "video", id, nome, time)*/
 			
-			if (f.save(image, "image", id, nome, time) &&
-				f.save(video, "video", id, nome, time)) {
+			
+			if ((f.verificaExt(image, 0) &&
+				f.verificaExt(video, 1)) &&
+				((!image.getContentType().equals("application/octet-stream")) &&
+			     (!video.getContentType().equals("application/octet-stream")))) {
+				
+				f.save(image, "image", id, nome, time);
+				f.save(video, "video", id, nome, time);
+				
 				String form_img = image.getContentType().split("/")[1];
 				String form_vid = video.getContentType().split("/")[1];
 				Par par = new Par(req.session().attribute("user"), nome, time, form_img, form_vid, nivel);

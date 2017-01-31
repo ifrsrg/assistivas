@@ -12,9 +12,7 @@ $(document).ready(function(){
 	checar();
 	
 	menu = document.getElementsByClassName("container-fluid")[0].innerHTML;
-	
-	alert(menu);
-	
+		
     $(document).on("click", "#jogar", function(){
     	if (getTamanho() != undefined && getNivel() != undefined && getTipoPares() != undefined){
 	        carregarJogo();
@@ -251,9 +249,7 @@ function jogar_novamente(){
     document.getElementsByTagName("h1")[0].innerHTML = "Jogo da Memória";
     
     document.getElementsByClassName("container-fluid")[0].innerHTML = menu;
-    
-    alert(menu);
-    
+        
     checar();
 }
 
@@ -304,7 +300,6 @@ function toMenu(){
 }
 
 function checar(){
-	alert($(".hidden:first").html());
 	if ($(".hidden:first").html() != 'true') {
 		$("#3B").click();
 	}

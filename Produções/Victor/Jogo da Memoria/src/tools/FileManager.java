@@ -9,38 +9,30 @@ import javax.servlet.http.Part;
 
 public class FileManager {
 
-	public boolean save(Part file, String tipo, int id, String nome, String timestamp){
+	public Boolean save(Part file, String tipo, int id, String nome, String timestamp){
 						
-		if (((tipo.equals("image")) && (file.getContentType().equals("image/jpeg")  ||
-									    file.getContentType().equals("image/png"))) ||
-			((tipo.equals("video")) && (file.getContentType().equals("video/mp4")   ||
-										file.getContentType().equals("video/mkv")   ||
-										file.getContentType().equals("video/avi")   ||
-										file.getContentType().equals("video/ogg")   ||
-										file.getContentType().equals("video/x-msvideo")))) {
-			try {
-			
-				InputStream input = file.getInputStream();
-				nome = nome.replace(" ", "_");
-				String nome_file = id + "_" + nome + "_" + timestamp + "." + file.getContentType().split("/")[1];
-				FileOutputStream output = new FileOutputStream("bin/pub/" + tipo + "/" + nome_file);
-				for (int i = input.read(); i >= 0; i = input.read()) {
-					output.write(i);
-				}
-				input.close();
-				output.flush();
-				output.close();
-				if (tipo.equals("video"))
-					converte(nome_file);
-				return true;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return false;
+		try {
+		
+			InputStream input = file.getInputStream();
+			nome = nome.replace(" ", "_");
+			String nome_file = id + "_" + nome + "_" + timestamp + "." + file.getContentType().split("/")[1];
+			FileOutputStream output = new FileOutputStream("bin/pub/" + tipo + "/" + nome_file);
+			for (int i = input.read(); i >= 0; i = input.read()) {
+				output.write(i);
 			}
-		} return false;
+			input.close();
+			output.flush();
+			output.close();
+			if (tipo.equals("video"))
+				converte(nome_file);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
-	public boolean update(Part file, String tipo, int id, String nome, String timestamp){
+	public Boolean update(Part file, String tipo, int id, String nome, String timestamp){
 		
 		File dir = getDir(tipo);
 		
@@ -96,5 +88,31 @@ public class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Boolean verificaExt(Part file, int tipo){
+		
+		String conteudo = file.getContentType();
+		
+		switch(tipo){
+			case 0: if (conteudo.equals("image/jpeg") ||
+						conteudo.equals("image/png") ||
+						conteudo.equals("application/octet-stream")) {
+						return true;
+					}else{
+						return false;
+					}
+			case 1: if (conteudo.equals("video/mp4") || 
+						conteudo.equals("video/avi") ||
+						conteudo.equals("video/mkv") ||
+						conteudo.equals("video/ogg") ||
+						conteudo.equals("video/x-msvideo") ||
+						conteudo.equals("application/octet-stream")){
+						return true;
+					}else{
+						return false;
+					}
+		}
+		return null;
 	}
 }

@@ -26,14 +26,23 @@
 <body>
 
 	<div class='container-fluid'>
-		<h1 class='text-center'>Editar</h1>
-		
-		<form method = 'post' action='/editarPar/{{data}}' enctype='multipart/form-data' onsubmit='return verifica()'>
+		<h1 class='text-center'>Editar</h1>		
 		
 			<div class='row'>
 				
 				<div class='col-sm-offset-3 col-sm-6 bloco'>
+				{{#erro}}
+					<div class='text-center'>
+						<label class='control-label'>{{erro}}</label>
+					</div>
+				{{/erro}}
 				
+		{{#par}}
+				
+				
+		<form method = 'post' action='/editarPar/{{data}}' enctype='multipart/form-data' onsubmit='return verifica()'>
+		
+		
 					<div class='form-group row'>
 				<div class='col-sm-12'>
 					<label for='nome' class='control-label'>Palavra</label>
@@ -102,6 +111,8 @@
 	<span style='display:none;' id='old_name'>{{nome}}</span>
 	<span style='display:none;' id='old_nivel'>{{nivel}}</span>
 	
+	
+	{{/par}}
 	</div>
 </body>
 </html>

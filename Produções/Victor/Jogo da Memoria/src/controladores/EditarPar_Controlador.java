@@ -1,5 +1,8 @@
 package controladores;
 
+import java.net.URLEncoder;
+import java.util.HashMap;
+
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
@@ -24,7 +27,15 @@ public class EditarPar_Controlador {
 			ParDAO dao = new ParDAO();
 			
 			Par par = dao.selectByData(req.params("data"));
-			return new ModelAndView(par, "editarPar.html");
+			
+			HashMap dados = new HashMap();
+			dados.put("par", par);
+			
+			if (req.queryMap("erro") != null) {
+				dados.put("erro", req.queryParams("erro"));
+			}
+			
+			return new ModelAndView(dados, "editarPar.html");
 			
 		}
 		
@@ -55,26 +66,35 @@ public class EditarPar_Controlador {
 			par.setData(data);
 			
 			FileManager f = new FileManager();
-						
-			f.update(image, "image", id, nome, data);
-			f.update(video, "video", id, nome, data);
 			
-			String form_img = null;
-			
-			if (!image.getContentType().equals("application/octet-stream")) {
-				form_img = image.getContentType().split("/")[1];
-			}
-			
-			par.setForm_img(form_img);
-			par.setForm_vid("ogg");
-			ParDAO parDAO = new ParDAO();
+			if (f.verificaExt(image, 0) &&
+				f.verificaExt(video, 1)){
 				
-			parDAO.update(par);
-			resp.redirect("/meusUploads");
-			return null;
+						
+				f.update(image, "image", id, nome, data);
+				f.update(video, "video", id, nome, data);
+				
+				String form_img = null;
+				
+				if (!image.getContentType().equals("application/octet-stream")) {
+					form_img = image.getContentType().split("/")[1];
+				}
+				
+				par.setForm_img(form_img);
+				par.setForm_vid("ogg");
+				ParDAO parDAO = new ParDAO();
+					
+				parDAO.update(par);
+				resp.redirect("/meusUploads");
 			
+			}else{
+				String erro = URLEncoder.encode("Formatos de arquivo incorretos", "UTF-8");
+				resp.redirect("/editarPar/" + par.getData() + "?erro="+erro);
 			}
+			return null;
 		}
+		
+	}
 	
 	public TemplateViewRoute getMostrar() {
 		return mostrar;
@@ -83,4 +103,5 @@ public class EditarPar_Controlador {
 		return salvar;
 	}
 		
+
 }
