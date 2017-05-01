@@ -16,5 +16,4 @@ public class Login {
 	}
 	private String login;
 	private String senha;
-	private boolean logado;
 }

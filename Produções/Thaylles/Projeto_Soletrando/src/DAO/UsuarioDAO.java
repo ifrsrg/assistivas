@@ -1,10 +1,8 @@
 package DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import DAO.DB;
@@ -12,11 +10,11 @@ import model.*;
 
 public class UsuarioDAO{
 	
+	private static DB db = new DB();
+	
 	static{
-		try {
-			Connection c = null;
+		try(Connection c = db.getConnection()){
 		    Statement stmt;
-		    c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
 			stmt = c.createStatement();
         	stmt.executeUpdate("CREATE TABLE IF NOT EXISTS usuarios "
         			+ "(id_usuario SERIAL PRIMARY KEY, login VARCHAR(20) UNIQUE NOT NULL, "
@@ -32,13 +30,9 @@ public class UsuarioDAO{
 	}
 	
 	public static void insert(Usuario usuario){   
-		Connection c = null;
-    	String sql = "INSERT INTO usuarios (login, email, senha) VALUES (?,?,?)";
+		String sql = "INSERT INTO usuarios (login, email, senha) VALUES (?,?,?)";
 
-        try{   
-        c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando", "postgres", "Thaylles");
-        
-            	
+        try(Connection c = db.getConnection()){   
             	PreparedStatement cmd = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             	cmd.setString(1, usuario.getLogin());
@@ -60,13 +54,9 @@ public class UsuarioDAO{
        
     }
 	
-	public static Usuario select(int id){   
-		Connection c = null;
-        ResultSetMetaData rsmd = null;
-        int row=0;
+	public static Usuario select(int id){ 
 
-        try{   
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","Thaylles");
+        try(Connection c = db.getConnection()){   
             String sql = "SELECT login, email, senha FROM usuarios WHERE id_usuario = ?;";
 
 			PreparedStatement cmd = c.prepareStatement(sql);
@@ -93,13 +83,10 @@ public class UsuarioDAO{
     }
 
 	public static int verificador(Login usuario){
-		Connection c = null;
         Statement s = null;
         int verificador = 0;
         
-        try{   
-        	
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/soletrando","postgres","Thaylles");
+        try(Connection c = db.getConnection()){
             if (c != null){   
                 s = c.createStatement();
                 String sql = "SELECT id_usuario FROM usuarios where login = ? and senha=?;";

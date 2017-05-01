@@ -18,8 +18,7 @@ public class controladorAdiciona implements TemplateViewRoute	{
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			
-			UsuarioDAO dao = new UsuarioDAO();
-			dao.insert(usuario);
+			UsuarioDAO.insert(usuario);
 			
 			
 			resp.redirect("/");

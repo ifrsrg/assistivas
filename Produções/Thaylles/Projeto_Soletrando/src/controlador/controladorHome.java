@@ -1,7 +1,4 @@
 package controlador;
-import DAO.UsuarioDAO;
-import controlador.*;
-import distance.Levenshtein;
 import spark.*;
 
 public class controladorHome {

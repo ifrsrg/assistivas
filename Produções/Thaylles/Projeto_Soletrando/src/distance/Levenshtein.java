@@ -2,8 +2,6 @@ package distance;
 
 import dicionario.Dicionario;
 
-import java.io.*;
-
 public class Levenshtein {
 
 	public static String distance(String a) {

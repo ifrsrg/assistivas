@@ -8,34 +8,34 @@ import javax.sound.sampled.*;
 public class ConcatenateWAV {
 	
 	public static void soletrar(String palavra) {
-		char [] letras = palavra.toCharArray();
+		//char [] letras = palavra.toCharArray();
 		ArrayList<String> temp = new ArrayList<String>();
-		
+		/*
 		for(int index = 0; index < letras.length; index++) {
 			switch (letras[index]) {      
-	        	case 'á': temp.add("a");temp.add("´");break;
-	        	case 'à': temp.add("a");temp.add("`");break;
-	        	case 'ã': temp.add("a");temp.add("~");break;
-	        	case 'â': temp.add("a");temp.add("^");break;
-	        	case 'é': temp.add("e");temp.add("´");break;
-	        	case 'ê': temp.add("e");temp.add("^");break;
-	        	case 'í': temp.add("i");temp.add("´");break;
-	        	case 'ó': temp.add("o");temp.add("´");break; 
-	        	case 'õ': temp.add("o");temp.add("~");break;
-	        	case 'ô': temp.add("o");temp.add("^");break;
-	        	case 'ú': temp.add("u");temp.add("´");break;  
-	        	case 'ç': temp.add("c");temp.add("ç");break;
-	        	case '°': break;
-	        	case 'º': break;
-	        	case 'ª': break;
-	        	case '¹': break;
-	        	case '²': break;
-	        	case '³': break;
+	        	case 'ï¿½': temp.add("a");temp.add("ï¿½");break;
+	        	case 'ï¿½': temp.add("a");temp.add("`");break;
+	        	case 'ï¿½': temp.add("a");temp.add("~");break;
+	        	case 'ï¿½': temp.add("a");temp.add("^");break;
+	        	case 'ï¿½': temp.add("e");temp.add("ï¿½");break;
+	        	case 'ï¿½': temp.add("e");temp.add("^");break;
+	        	case 'ï¿½': temp.add("i");temp.add("ï¿½");break;
+	        	case 'ï¿½': temp.add("o");temp.add("ï¿½");break; 
+	        	case 'ï¿½': temp.add("o");temp.add("~");break;
+	        	case 'ï¿½': temp.add("o");temp.add("^");break;
+	        	case 'ï¿½': temp.add("u");temp.add("ï¿½");break;  
+	        	case 'ï¿½': temp.add("c");temp.add("ï¿½");break;
+	        	case 'ï¿½': break;
+	        	case 'ï¿½': break;
+	        	case 'ï¿½': break;
+	        	case 'ï¿½': break;
+	        	case 'ï¿½': break;
+	        	case 'ï¿½': break;
 	        	case '&': break;
 	        	default: temp.add(letras[index] + "");
 			}
 		}
-
+*/
 		AudioInputStream audio = null;
 				
 		for(int index = 0; index < temp.size(); index++) {

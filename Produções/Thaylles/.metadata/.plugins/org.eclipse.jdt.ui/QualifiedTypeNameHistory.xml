@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="DAO.UsuarioDAO"/>
+<fullyQualifiedTypeName name="DAO.AdicionaDAO"/>
+<fullyQualifiedTypeName name="DAO.UploadDAO"/>
+<fullyQualifiedTypeName name="model.Upload"/>
 </qualifiedTypeNameHistroy>

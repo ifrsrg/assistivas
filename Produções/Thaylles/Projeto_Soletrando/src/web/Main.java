@@ -1,12 +1,8 @@
 package web;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import controlador.*;
 import spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
-import DAO.*;
 public class Main {
 
 	public static void main(String[] args) {
@@ -48,9 +44,16 @@ public class Main {
 		TemplateViewRoute paginaUpload = upador.mostrar;
 		Spark.get("/login/upload", paginaUpload, engine);
 		
-		controladorJogo jogo = new controladorJogo();
+		controladorJogo jogo = new controladorJogo(); 
 		TemplateViewRoute paginaJogo = jogo.mostrar;
 		Spark.get("/login/jogo", paginaJogo , engine);
+		
+		controladorGravar gravar = new controladorGravar();
+		TemplateViewRoute paginaGravar = gravar.mostrar;
+		Spark.get("/login/gravar", paginaGravar, engine);
+		
+		Route gravarAudio = gravar.salvar;
+		Spark.post("/recebegravar", gravarAudio);
 		
 		/*
 		Filter logadoB = new Filter(){
@@ -66,9 +69,16 @@ public class Main {
 			}
 		};
 
-	Spark.before("/login/jogo", logadoB);
-	Spark.before("/login/upload", logadoB);
-	Spark.before("/login/home", logadoB);	
-			*/
+		Spark.before("/login/jogo", logadoB);
+		Spark.before("/login/upload", logadoB);
+		Spark.before("/login/home", logadoB);	
+		*/
+		
+		ContatosWebService ws = new ContatosWebService();
+		
+		Spark.get("/palavras/:palavra", ws.contentType, ws.selectRota, ws.responseTransformer);
+		
+		Spark.get("/palavras", ws.contentType, ws.selectAll, ws.responseTransformer);
+		
 	}
 }

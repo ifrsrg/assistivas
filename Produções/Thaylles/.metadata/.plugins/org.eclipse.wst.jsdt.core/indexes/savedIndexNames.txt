@@ -1,6 +1,6 @@
-INDEX VERSION 1.3+C:\Users\Maquiela F\Desktop\Thaylles\assistivas\Produções\Thaylles\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-409580287.index
-4136387491.index
-925138789.index
-4292661227.index
-3685661996.index
+INDEX VERSION 1.3+F:\assistivas\Produções\Thaylles\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3270179038.index
+3200224921.index
+1561253931.index
+1206546118.index
+1166628947.index

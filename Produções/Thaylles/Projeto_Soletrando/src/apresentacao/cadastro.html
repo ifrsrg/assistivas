@@ -16,7 +16,7 @@
 		var confirmPassword = $("#senha2").val();
 
 		if (password != confirmPassword){
-			$("#divCheckPasswordMatch").html("<strong>Fracasso!</strong> As senhas n�o conferem.");
+			$("#divCheckPasswordMatch").html("<strong>Fracasso!</strong> As senhas não conferem.");
 			$("#divCheckPasswordMatch").addClass("alert alert-danger");
 		}
 	}
@@ -24,7 +24,6 @@
 	
 </head>
 <body>
-<h2 style="text-align: center;">CADASTRO</h2>
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
 			<li class="sidebar-brand">
@@ -43,7 +42,7 @@
 	</div>
 
 	<div class="container">
-		<div id="centro">
+	<h2 style="text-align: center;">CADASTRO</h2>
 		<form class="form-horizontal" onsubmit="alert('Cadastro criado com sucesso')" role="form" method="post" action="/cadastro">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="login">Login:</label>
@@ -71,7 +70,6 @@
 				</div>
 			</form>
 			<div id="divCheckPasswordMatch"></div>	
-		</div>
 		</div>
 	</body>
 	</html>

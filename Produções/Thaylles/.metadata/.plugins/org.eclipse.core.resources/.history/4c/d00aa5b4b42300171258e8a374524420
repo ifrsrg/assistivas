@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jogo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/estilo.css" rel="stylesheet">
+	<link href="../css/simple-sidebar.css" rel="stylesheet">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/script.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<a href="#">
+					Soletrando
+				</a>
+			</li>
+			<li>
+			<a href="">Deseja parar o jogo?</a>
+			</li>
+		</ul>
+	</div>
+<div class="container">
+	<div id="centro">
+	<p>Digite a palavra escutada:</p>
+	<label> <input type="text" name="palavra" size="20"> </label>
+	<input type="submit">
+</div>
+</div>
+</body>
+</html>

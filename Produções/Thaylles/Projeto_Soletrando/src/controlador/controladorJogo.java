@@ -1,6 +1,5 @@
 package controlador;
 
-import controlador.controladorCadastro.Mostra;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

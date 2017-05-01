@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Soletrando</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/simple-sidebar.css" rel="stylesheet">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+<!-- <script>
+
+navigator.getUserMedia = (navigator.getUserMedia || navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia  || navigator.webkitGetUserMedia);
+
+
+if (navigator.getUserMedia) {
+console.log('getUserMedia supported.');
+
+var constraints = { audio: true };
+var chunks = [];
+
+var onSuccess = function(stream) {
+var mediaRecorder = new MediaRecorder(stream);
+
+record.onclick = function() {
+mediaRecorder.start();
+console.log(mediaRecorder.state);
+console.log("recorder started");
+record.style.background = "red";
+record.style.color = "black";
+}
+
+stop.onclick = function() {
+mediaRecorder.stop();
+console.log(mediaRecorder.state);
+console.log("recorder stopped");
+record.style.background = "";
+record.style.color = "";
+// mediaRecorder.requestData();
+}
+
+mediaRecorder.onstop = function(e) {
+console.log("data available after MediaRecorder.stop() called.");
+
+var clipName = prompt('Enter a name for your sound clip');
+
+var clipContainer = document.createElement('article');
+var clipLabel = document.createElement('p');
+var audio = document.createElement('audio');
+var deleteButton = document.createElement('button');
+
+clipContainer.classList.add('clip');
+audio.setAttribute('controls', '');
+deleteButton.innerHTML = "Delete";
+clipLabel.innerHTML = clipName;
+
+clipContainer.appendChild(audio);
+clipContainer.appendChild(clipLabel);
+clipContainer.appendChild(deleteButton);
+soundClips.appendChild(clipContainer);
+
+audio.controls = true;
+var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+chunks = [];
+var audioURL = window.URL.createObjectURL(blob);
+audio.src = audioURL;
+console.log("recorder stopped");
+
+deleteButton.onclick = function(e) {
+evtTgt = e.target;
+evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+}
+}
+
+mediaRecorder.ondataavailable = function(e) {
+chunks.push(e.data);
+}
+}
+
+var onError = function(err) {
+console.log('The following error occured: ' + err);
+}
+
+navigator.getUserMedia(constraints, onSuccess, onError);
+} else {
+console.log('getUserMedia not supported on your browser!');
+}
+var mediaConstraints = { audio: true };
+navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
+function onMediaSuccess(stream) {
+    var audio = document.createElement('audio');
+    audio = mergeProps(audio, {
+        controls: true,
+        src: URL.createObjectURL(stream)
+    });
+    audio.play();
+
+    audiosContainer.appendChild(audio);
+    audiosContainer.appendChild(document.createElement('hr'));
+
+    var mediaRecorder = new MediaStreamRecorder(stream);
+    mediaRecorder.mimeType = 'audio/ogg';
+    mediaRecorder.ondataavailable = function(blob) {
+        var a = document.createElement('a');
+        a.target = '_blank';
+        a.innerHTML = 'Open Recorded Audio No. ' + (index++);
+
+        a.href = URL.createObjectURL(blob);
+
+        audiosContainer.appendChild(a);
+        audiosContainer.appendChild(document.createElement('hr'));
+    };
+
+    // get blob after each 5 second!
+    mediaRecorder.start(5 * 1000);
+}
+
+function onMediaError(e) {
+    console.error('media error', e);
+}
+
+var audiosContainer = document.getElementById('audios-container');
+var index = 1;
+
+</script>
+-->
+</head>
+<body>
+
+
+<div class="container">
+
+<form action="/recebegravar" method="post" enctype="multipart/form-data">
+
+<button id="record" value="record" name="record">Gravar</button>
+<button id="stop" value="stop" name="stop">Parar</button>
+
+					<div>
+					<br>
+					<p>Qual o nivel dessa palavra?</p>
+					<br>
+					Nivel 1
+					<input type="radio" name="nivel" value="1"><br>
+					Nivel 2
+					<input type="radio" name="nivel" value="2"><br>
+					Nivel 3
+					<input type="radio" name="nivel" value="3">
+				</div>
+			<br>
+			<br>			
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+
+<!--
+<form action="/recebegravar" method="post" enctype="multipart/form-data">
+  <input type="file" name="arquivo" accept="audio/*" capture>
+  <input type="submit" value="Upload">
+</form>
+
+-->
+</div>
+</body>
+</html>

@@ -6,8 +6,7 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
 import DAO.UploadDAO;
-import controlador.*;
-import controlador.controladorHome.Mostrar;
+import model.Upload;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -35,7 +34,13 @@ public class controladorUpload implements Route {
 		}
 		System.out.println("bin/publico/" + req.queryMap("nome").value() + ".mp3");
 		System.out.println(req.queryMap("nome").value());
-		UploadDAO.insertPalavras(req.queryMap("nome").value(), req.queryMap("nivel").integerValue(), "bin/publico/" + req.queryMap("nome").value() + ".mp3");
+		
+		Upload palavra = new Upload();
+		palavra.setPalavra(req.queryMap("nome").value());
+		palavra.setCaminho("bin/publico/" + req.queryMap("nome").value() + ".mp3");
+		palavra.setDificuldade(req.queryMap("nivel").integerValue());
+		
+		UploadDAO.insertPalavras(palavra);
 		
 		resp.redirect("/login/home");
 		return null;

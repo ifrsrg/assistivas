@@ -22,6 +22,9 @@ public class controladorLogin {
 			cliente.setLogin(login);
 			cliente.setSenha(senha);
 			
+			System.out.println(login);
+			System.out.println(senha);
+			
 			System.out.print(req.attributes());
 			
 			int identificador = UsuarioDAO.verificador(cliente);
